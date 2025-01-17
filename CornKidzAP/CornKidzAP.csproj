@@ -1,0 +1,77 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>CornKidzAP</AssemblyName>
+    <Product>CornKidzAP</Product>
+    <Version>0.0.1</Version>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>latest</LangVersion>
+    <RestoreAdditionalProjectSources>
+      https://api.nuget.org/v3/index.json;
+      https://nuget.bepinex.dev/v3/index.json;
+      https://nuget.samboy.dev/v3/index.json
+    </RestoreAdditionalProjectSources>
+    <RootNamespace>CornKidzAP</RootNamespace>
+    <Configurations>Debug 1.039;Debug 1.037;Release 1.039;Release 1.037;Test 1.039</Configurations>
+    <Platforms>AnyCPU</Platforms>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug 1.039' ">
+    <DebugSymbols Condition=" '$(DebugSymbols)' == '' ">true</DebugSymbols>
+    <Optimize Condition=" '$(Optimize)' == '' ">false</Optimize>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug 1.037' ">
+    <DebugSymbols Condition=" '$(DebugSymbols)' == '' ">true</DebugSymbols>
+    <Optimize Condition=" '$(Optimize)' == '' ">false</Optimize>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release 1.039' ">
+    <Optimize Condition=" '$(Optimize)' == '' ">true</Optimize>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release 1.037' ">
+    <Optimize Condition=" '$(Optimize)' == '' ">true</Optimize>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Archipelago.MultiClient.Net" Version="6.5.0" />
+    <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all" />
+    <PackageReference Include="BepInEx.Core" Version="5.*" />
+    <PackageReference Include="BepInEx.PluginInfoProps" Version="2.*" />
+    <PackageReference Include="UniTask" Version="2.5.10" />
+    <PackageReference Include="UnityEngine.Modules" Version="2021.3.30" IncludeAssets="compile" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <!-- Extract version from Configuration Name -->
+    <BaseGameVersion Condition="'$(Configuration)' != ''">$(Configuration.Replace('Debug ', '').Replace('Release ', '').Replace('Test ', ''))</BaseGameVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>lib\$(BaseGameVersion)\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>lib\UnityEngine.UI.dll</HintPath>
+      <Private>False</Private>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </Reference>
+    <Reference Include="Facepunch.Steamworks.Win64">
+      <HintPath>lib\Facepunch.Steamworks.Win64.dll</HintPath>
+      <Private>False</Private>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </Reference>
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' != 'Test*'">
+    <Exec Command="copy /y &quot;$(UserProfile)\.nuget\packages\archipelago.multiclient.net\6.5.0\lib\netstandard2.0\Archipelago.MultiClient.Net.dll&quot; &quot;$(TargetDir)&quot;&#xA; if not exist &quot;D:\SteamLibrary\steamapps\common\Corn Kidz 64\BepInEx\plugins\CornKidzAP&quot; mkdir &quot;D:\SteamLibrary\steamapps\common\Corn Kidz 64\BepInEx\plugins\CornKidzAP&quot;&#xA;XCOPY /S /Y &quot;$(TargetDir)*&quot; &quot;D:\SteamLibrary\steamapps\common\Corn Kidz 64\BepInEx\plugins\CornKidzAP&quot;" />
+  </Target>
+</Project>
