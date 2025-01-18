@@ -23,7 +23,7 @@ public static class ArchipelagoClient
     private const string GameName = "Corn Kidz 64";
 
     private static ConcurrentQueue<ItemInfo> _itemQueue = new();
-    public static APState State; 
+    public static APState State;
     public static bool Authenticated;
     public static bool IsConnecting;
     public static APConnectionInfo ConnectionInfo;
@@ -39,15 +39,16 @@ public static class ArchipelagoClient
     public static string LastSeed;
     public static bool IsNew { get; set; }
     public static bool HasBeatenGoal { get; private set; }
-    public static bool CanSendRelease {
+
+    public static bool CanSendRelease
+    {
         get
         {
-            if(!Authenticated || Session == null)
+            if (!Authenticated || Session == null)
                 return false;
-            return (Session.RoomState.ReleasePermissions.HasFlag(Permissions.Enabled) || 
-                   HasBeatenGoal && Session.RoomState.ReleasePermissions.HasFlag(Permissions.Goal)) &&
+            return (Session.RoomState.ReleasePermissions.HasFlag(Permissions.Enabled) ||
+                    HasBeatenGoal && Session.RoomState.ReleasePermissions.HasFlag(Permissions.Goal)) &&
                    Session.Locations.AllMissingLocations.Count > 0; //nothing left to release
-            
         }
     }
 
@@ -55,18 +56,18 @@ public static class ArchipelagoClient
     {
         get
         {
-            if(!Authenticated || Session == null)
+            if (!Authenticated || Session == null)
                 return false;
             return Session.RoomState.CollectPermissions.HasFlag(Permissions.Enabled) ||
                    HasBeatenGoal && Session.RoomState.CollectPermissions.HasFlag(Permissions.Goal);
         }
     }
-    
+
     public static bool CanSendRemaining
     {
         get
         {
-            if(!Authenticated || Session == null)
+            if (!Authenticated || Session == null)
                 return false;
             return Session.RoomState.RemainingPermissions.HasFlag(Permissions.Enabled) ||
                    HasBeatenGoal && Session.RoomState.RemainingPermissions.HasFlag(Permissions.Goal);
@@ -118,9 +119,9 @@ public static class ArchipelagoClient
         {
             return new LoginFailure(e.Message);
         }
+
         return result;
     }
-
 
     public static async UniTaskVoid Connect()
     {
@@ -139,10 +140,12 @@ public static class ArchipelagoClient
                 SlotData = new APSlotData(loginSuccess.SlotData);
                 Session.DataStorage.TrackClientStatus(Session_TrackPlayerStatus);
                 APDeathLinkHandler.DeathLinkService = Session.CreateDeathLinkService();
-                if(SlotData.IsDeathLink) APDeathLinkHandler.DeathLinkService.EnableDeathLink();
+                if (SlotData.IsDeathLink) APDeathLinkHandler.DeathLinkService.EnableDeathLink();
                 APDeathLinkHandler.DeathLinkService.OnDeathLinkReceived += APDeathLinkHandler.HandleDeathLink;
+                var copySettings = GameCtrl.instance.data.GetCopySettings();
                 GameCtrl.instance.ResetSav();
                 GameCtrl.instance.LoadGame();
+                GameCtrl.instance.data.ApplyCopySettings(copySettings);
                 var activeScene = SceneManager.GetActiveScene().name;
                 if (activeScene != "title01")
                 {
@@ -156,8 +159,8 @@ public static class ArchipelagoClient
                     {
                         GameCtrl.instance.LoadScene("");
                     }
+
                     UI.instance.UnPause();
-                    
                 }
             }
             else if (loginResult is LoginFailure loginFailure)
@@ -365,9 +368,9 @@ public static class ArchipelagoClient
 
     public static async UniTaskVoid Disconnect()
     {
-        if (Authenticated) 
+        if (Authenticated)
             GameCtrl.instance.SaveGame();
-        if (Session is { Socket.Connected: true }) 
+        if (Session is { Socket.Connected: true })
             await Session.Socket.DisconnectAsync();
         Reset();
         APConsole?.AddLogMessage(new APConsoleLogEntry("Disconnected from AP Server.", ConsoleLogType.Information));
@@ -377,7 +380,7 @@ public static class ArchipelagoClient
     {
         if (!Authenticated || State != APState.InGame)
             return;
-        if(HasBeatenGoal)
+        if (HasBeatenGoal)
             return;
         HasBeatenGoal = true;
         Session.SetGoalAchieved();

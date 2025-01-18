@@ -36,7 +36,7 @@ public class APMainMenuTrackerUI : MonoBehaviour
         _rectTransform.anchorMin = new(0.5f, 0);
         _rectTransform.anchorMax = new(0.5f, 0);
         _rectTransform.pivot = new(0.5f, 0);
-        _rectTransform.anchoredPosition3D = new(-10, 50, 0);
+        _rectTransform.anchoredPosition3D = _startPosition;
         _image = hudObject.AddComponent<Image>();
         _image.color = new Color(0.1321f, 0.0758f, 0.0704f, 0.6588f);
         _image.material = new Material(_image.material)

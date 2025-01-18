@@ -17,6 +17,10 @@
     <Platforms>AnyCPU</Platforms>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug 1.039' ">
     <DebugSymbols Condition=" '$(DebugSymbols)' == '' ">true</DebugSymbols>
     <Optimize Condition=" '$(Optimize)' == '' ">false</Optimize>
@@ -71,7 +75,17 @@
     </Reference>
   </ItemGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' != 'Test*'">
-    <Exec Command="copy /y &quot;$(UserProfile)\.nuget\packages\archipelago.multiclient.net\6.5.0\lib\netstandard2.0\Archipelago.MultiClient.Net.dll&quot; &quot;$(TargetDir)&quot;&#xA; if not exist &quot;D:\SteamLibrary\steamapps\common\Corn Kidz 64\BepInEx\plugins\CornKidzAP&quot; mkdir &quot;D:\SteamLibrary\steamapps\common\Corn Kidz 64\BepInEx\plugins\CornKidzAP&quot;&#xA;XCOPY /S /Y &quot;$(TargetDir)*&quot; &quot;D:\SteamLibrary\steamapps\common\Corn Kidz 64\BepInEx\plugins\CornKidzAP&quot;" />
+  <Target Name="PrepareOutput" AfterTargets="Build">
+    <ItemGroup>
+      <UnwantedAssemblies Include="$(OutputPath)\*.dll" />
+      <UnwantedAssemblies Remove="@(UnwantedAssemblies)" Condition="'%(Filename)' == 'CornKidzAP'" />
+      <UnwantedAssemblies Remove="@(UnwantedAssemblies)" Condition="'%(Filename)' == 'Archipelago.MultiClient.Net'" />
+      <UnwantedAssemblies Remove="@(UnwantedAssemblies)" Condition="'%(Filename)' == 'Newtonsoft.Json'" />
+      <UnwantedAssemblies Remove="@(UnwantedAssemblies)" Condition="'%(Filename)' == 'UniTask'" />
+    </ItemGroup>
+    <Delete Files="@(UnwantedAssemblies)" />
+  </Target>
+  <Target Name="PostBuild" DependsOnTargets="PrepareOutput" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' != 'Test*'">
+    <Exec Command="if not exist &quot;D:\SteamLibrary\steamapps\common\Corn Kidz 64\BepInEx\plugins\CornKidzAP&quot; mkdir &quot;D:\SteamLibrary\steamapps\common\Corn Kidz 64\BepInEx\plugins\CornKidzAP&quot;&#xA;XCOPY /S /Y &quot;$(TargetDir)*&quot; &quot;D:\SteamLibrary\steamapps\common\Corn Kidz 64\BepInEx\plugins\CornKidzAP&quot;" />
   </Target>
 </Project>
