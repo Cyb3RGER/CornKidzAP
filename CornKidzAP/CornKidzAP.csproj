@@ -22,21 +22,25 @@
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug 1.039' ">
-    <DebugSymbols Condition=" '$(DebugSymbols)' == '' ">true</DebugSymbols>
-    <Optimize Condition=" '$(Optimize)' == '' ">false</Optimize>
+    <DebugSymbols>true</DebugSymbols>
+    <Optimize>false</Optimize>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug 1.037' ">
-    <DebugSymbols Condition=" '$(DebugSymbols)' == '' ">true</DebugSymbols>
-    <Optimize Condition=" '$(Optimize)' == '' ">false</Optimize>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release 1.039' ">
-    <Optimize Condition=" '$(Optimize)' == '' ">true</Optimize>
+    <DebugSymbols>true</DebugSymbols>
+    <Optimize>false</Optimize>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release 1.037' ">
-    <Optimize Condition=" '$(Optimize)' == '' ">true</Optimize>
+    <Optimize>true</Optimize>
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release 1.039' ">
+    <Optimize>true</Optimize>
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>none</DebugType>
   </PropertyGroup>
 
   <ItemGroup>
