@@ -1,4 +1,5 @@
 using HarmonyLib;
+using UnityEngine;
 
 namespace CornKidzAP.Patches;
 
@@ -17,20 +18,21 @@ public class World2Fixes
             __instance.gameObject.SetActive(false);
         }
     }
-    
-    // /// <summary>
-    // /// Advance to Zoo Pig State so the Metal Worm can be returned anytime
-    // /// </summary>
-    // [HarmonyPatch(typeof(CopySaveTrigger), "Load")]
-    // public static class AutoAdvanceZooPigState
-    // {
-    //     [HarmonyPostfix]
-    //     public static void Postfix(CopySaveTrigger __instance)
-    //     {
-    //         if(!ArchipelagoClient.Authenticated || ArchipelagoClient.State != APState.InGame) return;
-    //         if (__instance.name != "pig01 (4)") return;
-    //         if (!__instance.saveTrigger || __instance.saveTrigger.id != 202) return;
-    //         APLocationChecker.FakeLoadCopySaveTrigger(__instance, null, true);
-    //     }
-    // }
+
+    /// <summary>
+    /// Locally (un)flip the ooze collider in the zoo to avoid y-shift
+    /// </summary>
+    [HarmonyPatch(typeof(SaveTrigger), nameof(SaveTrigger.Load))]
+    public static class FixZooOoze
+    {
+        [HarmonyPostfix]
+        public static void Postfix(SaveTrigger __instance)
+        {
+            if(__instance.name != "flipevent" || __instance.id != 200) return;
+            
+            var obj = GameObject.Find("WORLD/etcObjects/ooze/ooze (1)");
+            if(!obj) return;
+            obj.transform.localScale = __instance.bOn ? new(-1,1,1) : Vector3.one;
+        }
+    }
 }
