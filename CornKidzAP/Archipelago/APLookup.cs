@@ -83,7 +83,7 @@ public static class APLookup
         { BaseID + 66, 265 }, //XP Cube Hollow Clockwise Vomit
         { BaseID + 67, 215 }, //XP Cube Hollow Fart Tunnel #1
         { BaseID + 68, 214 }, //XP Cube Hollow Fart Tunnel #2
-        { BaseID + 69, 233 }, //XP Cube Hollow Pipe
+        { BaseID + 69, 233 }, //XP Cube Hollow Church Pillar
         { BaseID + 70, 255 }, //XP Cube Hollow Window #1
         { BaseID + 71, 271 }, //XP Cube Hollow Window #2
         { BaseID + 72, 273 }, //XP Cube Hollow Graveyard Pole #1
@@ -194,47 +194,50 @@ public static class APLookup
 
     public static readonly Dictionary<long, int> APLocIdToAchievementId = new()
     {
-        { BaseID + 179, 1 }, //Little Corn Cadet
-        { BaseID + 180, 2 }, //XP-ansion Pak
-        { BaseID + 181, 3 }, //maXPower
-        { BaseID + 182, 4 }, //...I'm a Lasagna Hog
-        { BaseID + 183, 5 }, //Get N(achos) or Get Out
-        { BaseID + 184, 6 }, //Anxiety Attack
-        { BaseID + 185, 7 }, //Private Screw'l
-        { BaseID + 186, 8 }, //Annoyed the Void
-        { BaseID + 187, 9 }, //High Bread Heaven
-        { BaseID + 188, 10 }, //Smoking Kills
-        { BaseID + 189, 11 }, //Magical Tetnis Challenge
-        { BaseID + 190, 12 }, //Corn Syrup
-        { BaseID + 191, 13 }, //Feast Fit For a Kid
-        { BaseID + 192, 14 }, //heroes in a Whole Shell
-        { BaseID + 193, 15 }, //Highdive
+        { BaseID + 181, 1 }, //Little Corn Cadet
+        { BaseID + 182, 2 }, //XP-ansion Pak
+        { BaseID + 183, 3 }, //maXPower
+        { BaseID + 184, 4 }, //...I'm a Lasagna Hog
+        { BaseID + 185, 5 }, //Get N(achos) or Get Out
+        { BaseID + 186, 6 }, //Anxiety Attack
+        { BaseID + 187, 7 }, //Private Screw'l
+        { BaseID + 188, 8 }, //Annoyed the Void
+        { BaseID + 189, 9 }, //High Bread Heaven
+        { BaseID + 190, 10 }, //Smoking Kills
+        { BaseID + 191, 11 }, //Magical Tetnis Challenge
+        { BaseID + 192, 12 }, //Corn Syrup
+        { BaseID + 193, 13 }, //Feast Fit For a Kid
+        { BaseID + 194, 14 }, //Heroes in a Whole Shell
+        { BaseID + 195, 15 }, //Highdive
     };
 
-    public static readonly Dictionary<long, int> APLocIdToSwitchId = new()
+    private static readonly Dictionary<long, int> APLocIdToSwitchId = new()
     {
         { BaseID + 172, 236 }, //Metal Worm
-        { BaseID + 200, 238 }, //Fish Graveyard Tree Stump
-        { BaseID + 201, 239 }, //Fish Owl Tree #1
-        { BaseID + 202, 240 }, //Fish Owl Tree #2
+        { BaseID + 202, 238 }, //Fish Graveyard Tree Stump
+        { BaseID + 203, 239 }, //Fish Owl Tree #1
+        { BaseID + 204, 240 }, //Fish Owl Tree #2
     };
 
-    public static readonly Dictionary<long, int> APLocIdToRatIndex = new()
+    private static readonly Dictionary<long, int> APLocIdToRatIndex = new()
     {
-        { BaseID + 194, 0 }, //Rat Near Entrance Next To Fence
-        { BaseID + 195, 1 }, //Rat Grass Area
-        { BaseID + 196, 2 }, //Rat In Cage Above Entrance
-        { BaseID + 197, 3 }, //Rat Sand Cage
-        { BaseID + 198, 4 }, //Rat Above Fresh Air
-        { BaseID + 199, 5 }, //Rat Wall Cage
+        { BaseID + 196, 0 }, //Rat Above Fresh Air
+        { BaseID + 197, 1 }, //Rat Sand Cage
+        { BaseID + 198, 2 }, //Rat Near Entrance Next To Fence
+        { BaseID + 199, 3 }, //Rat Wall Cage
+        { BaseID + 200, 4 }, //Rat In Cage Above Entrance
+        { BaseID + 201, 5 }, //Rat Grass Area
     };
 
-    public static readonly Dictionary<long, string> APLocIdToString = new()
+    private static readonly Dictionary<long, string> APLocIdToString = new()
     {
         { BaseID + 173, "OH DEAR GOD! THIS GUY WAS A SICKO!!" }, //OH DEAR GOD! THIS GUY WAS A SICKO!!
         { BaseID + 174, "HOWDY" }, //HOWDY
-        { BaseID + 203, "WEAR BLUE HEADBAND + SHIRT?" }, //Blue Headband
-        { BaseID + 204, "WEAR GREEN HEADBAND + SHIRT?" }, //Green Headband
+        { BaseID + 175, "CAN SOMEBODY TELL ME WHAT THESE STUPID DUCK THINGS EVEN ARE?" }, //CAN SOMEBODY TELL ME WHAT THESE STUPID DUCK THINGS EVEN ARE?
+        { BaseID + 176, "DANG... WHY COULDN'T I HAVE BEEN TRAPPED IN A REOCCURING DREAM WITH HER INSTEAD OF ALEXIS?" }, //DANG...
+        { BaseID + 205, "WEAR BLUE HEADBAND + SHIRT?" }, //Blue Headband
+        { BaseID + 206, "WEAR GREEN HEADBAND + SHIRT?" }, //Green Headband
+        { BaseID + 207, "WEAR BLACK HEADBAND + SHIRT?" }, //Black Headband
     };
 
 
