@@ -21,15 +21,16 @@ public class APMainMenuTrackerUI : MonoBehaviour
     private GridLayoutGroup _grid;
     private Image _image;
     private GameObject[] _rows = new GameObject[6];
+    public GameObject HUDObject;
 
     public void Awake()
     {
         _font = UI.instance.transform.Find("Objective").GetComponent<Text>().font;
-        var hudObject = new GameObject("APMainMenuHUD")
+        HUDObject = new GameObject("APMainMenuHUD")
         {
             layer = LayerMask.NameToLayer("UI")
         };
-        _rectTransform = hudObject.AddComponent<RectTransform>();
+        _rectTransform = HUDObject.AddComponent<RectTransform>();
         _rectTransform.SetParent(UI.instance.transform);
         _rectTransform.localRotation = Quaternion.identity;
         _rectTransform.localScale = new(1.87f, 1.87f, 1.87f);
@@ -37,17 +38,17 @@ public class APMainMenuTrackerUI : MonoBehaviour
         _rectTransform.anchorMax = new(0.5f, 0);
         _rectTransform.pivot = new(0.5f, 0);
         _rectTransform.anchoredPosition3D = _startPosition;
-        _image = hudObject.AddComponent<Image>();
+        _image = HUDObject.AddComponent<Image>();
         _image.color = new Color(0.1321f, 0.0758f, 0.0704f, 0.6588f);
         _image.material = new Material(_image.material)
         {
             shader = Shader.Find("UI/Default Font FRONT"),
             renderQueue = 3003
         };
-        var sizeFitter = hudObject.AddComponent<ContentSizeFitter>();
+        var sizeFitter = HUDObject.AddComponent<ContentSizeFitter>();
         sizeFitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
         sizeFitter.horizontalFit = ContentSizeFitter.FitMode.PreferredSize;
-        _grid = hudObject.AddComponent<GridLayoutGroup>();
+        _grid = HUDObject.AddComponent<GridLayoutGroup>();
         _grid.cellSize = new(80, 20);
         _grid.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
         _grid.spacing = new Vector2(0, -7);

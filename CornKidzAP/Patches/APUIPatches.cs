@@ -9,6 +9,9 @@ namespace CornKidzAP.Patches;
 
 public class APUIPatches
 {
+    /// <summary>
+    /// Show the Goal in the main menu's objective text
+    /// </summary>
     [HarmonyPatch(typeof(UI), "RunMenu")]
     public static class APUIShowGoalAsObjective
     {
@@ -28,6 +31,26 @@ public class APUIPatches
                 GoalTypes.God => "MEET DOG GOD",
                 _ => throw new ArgumentOutOfRangeException()
             };
+        }
+    }
+    
+    /// <summary>
+    /// Shows/Hides the Tracker UI when not on the main menu, for example in the options menu
+    /// </summary>
+    [HarmonyPatch(typeof(UI), "Update")]
+    public static class APShowAndHideTracker
+    {
+        [HarmonyPostfix]
+        public static void Postfix(UI __instance, int ___currentMenu)
+        {
+            if (!ArchipelagoClient.Authenticated || ArchipelagoClient.State != APState.InGame)
+                return;
+            if (!ArchipelagoClient.APMainMenuTrackerUI)
+                return;
+            if(!ArchipelagoClient.APMainMenuTrackerUI.HUDObject)
+                return;
+            if (ArchipelagoClient.APMainMenuTrackerUI.HUDObject.activeSelf == (___currentMenu == 0)) return;
+            ArchipelagoClient.APMainMenuTrackerUI.HUDObject.SetActive(___currentMenu == 0);
         }
     }
 
