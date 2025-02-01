@@ -13,7 +13,7 @@
       https://nuget.samboy.dev/v3/index.json
     </RestoreAdditionalProjectSources>
     <RootNamespace>CornKidzAP</RootNamespace>
-    <Configurations>Debug 1.039;Debug 1.037;Release 1.039;Release 1.037;Test 1.039</Configurations>
+    <Configurations>Debug 1.029;Debug 1.027;Release 1.029;Release 1.027;Test 1.029</Configurations>
     <Platforms>AnyCPU</Platforms>
   </PropertyGroup>
 
@@ -21,23 +21,23 @@
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug 1.039' ">
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug 1.029' ">
     <DebugSymbols>true</DebugSymbols>
     <Optimize>false</Optimize>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug 1.037' ">
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug 1.027' ">
     <DebugSymbols>true</DebugSymbols>
     <Optimize>false</Optimize>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release 1.037' ">
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release 1.027' ">
     <Optimize>true</Optimize>
     <DebugSymbols>false</DebugSymbols>
     <DebugType>none</DebugType>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release 1.039' ">
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release 1.029' ">
     <Optimize>true</Optimize>
     <DebugSymbols>false</DebugSymbols>
     <DebugType>none</DebugType>
