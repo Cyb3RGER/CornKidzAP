@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using CornKidzAP.Archipelago;
 using HarmonyLib;
 
@@ -6,6 +6,8 @@ namespace CornKidzAP.Patches;
 
 public class MirrorPatches
 {
+    private static readonly List<int> MirrorSwitchIds = [141, 142, 284, 288, 289, 290];
+    
     /// <summary>
     /// Patch to remove mirror that have already been collected
     /// </summary>
@@ -20,15 +22,11 @@ public class MirrorPatches
 
             if (!ArchipelagoClient.Authenticated || ArchipelagoClient.State != APState.InGame)
                 return;
-
-            // FixMe: this check kinda sucks
-            if (!__instance.transform.parent || !__instance.transform.parent.name.Contains("mirror", StringComparison.InvariantCultureIgnoreCase))
-                return;
             
-            if (__instance.saveItem == null || __instance.saveItem.id <= 0)
+            if (!MirrorSwitchIds.Contains(__instance.saveItem?.id ?? 0) && !MirrorSwitchIds.Contains(__instance.manualIDitem))
                 return;
 
-            var locId = APLookup.GetAPLocationForSaveItem(__instance.saveItem);
+            var locId = APLookup.GetAPLocationForSaveItemId(__instance.saveItem?.id ?? __instance.manualIDitem);
             if (locId == null)
                 return;
 
