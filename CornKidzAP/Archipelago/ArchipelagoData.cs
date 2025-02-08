@@ -74,7 +74,7 @@ public class ArchipelagoData
         {
             throw new InvalidOperationException("Must be connected to a server");
         }
-        var fileName = $"APSave_{ArchipelagoClient.ConnectionInfo.HostName}_{ArchipelagoClient.ConnectionInfo.SlotName}_{ArchipelagoClient.Session.RoomState.Seed}.json";
+        var fileName = $"APSave_{ArchipelagoClient.ConnectionInfo.SlotName}_{ArchipelagoClient.Session.RoomState.Seed}.json";
         return Path.GetInvalidFileNameChars().Aggregate(fileName, (current, invalidChar) => current.Replace(invalidChar, '_'));
     }
     
