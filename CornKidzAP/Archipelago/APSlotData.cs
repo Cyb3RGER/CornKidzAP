@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 
 namespace CornKidzAP.Archipelago;
 
@@ -21,6 +22,15 @@ public class APSlotData(Dictionary<string, object> slotData)
             return _default;
         return int.TryParse(value.ToString(), out var result) ? result : _default;
     }
+    
+    [CanBeNull]
+    public Version GetVersion(string key, [CanBeNull] Version _default = null)
+    {
+        if (!slotData.TryGetValue(key, out var value))
+            return _default;
+        var didParse = Version.TryParse(value.ToString(), out var result);
+        return didParse ? result : _default;
+    }
 
     public GoalTypes Goal
     {
@@ -31,6 +41,7 @@ public class APSlotData(Dictionary<string, object> slotData)
         }
     }
 
+    [CanBeNull] public Version ServerVersion => GetVersion("version");
     public int MaxHP => GetInt("max_hp", 8);
     public bool IsCranksanity => GetInt("cranksanity") > 0;
     public bool IsRatsanity => GetInt("ratsanity") > 0;

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Concurrent;
+using System.Threading.Tasks;
 using Archipelago.MultiClient.Net;
 using Archipelago.MultiClient.Net.BounceFeatures.DeathLink;
 using Archipelago.MultiClient.Net.Enums;
@@ -7,6 +8,7 @@ using Archipelago.MultiClient.Net.Helpers;
 using Archipelago.MultiClient.Net.MessageLog.Messages;
 using Archipelago.MultiClient.Net.Models;
 using Cysharp.Threading.Tasks;
+using JetBrains.Annotations;
 using UnityEngine.SceneManagement;
 
 namespace CornKidzAP.Archipelago;
@@ -39,6 +41,8 @@ public static class ArchipelagoClient
     public static string LastSeed;
     public static bool IsNew { get; set; }
     public static bool HasBeatenGoal { get; private set; }
+    
+    [CanBeNull] public static Version ModVersion => Version.TryParse(MyPluginInfo.PLUGIN_VERSION, out var version) ? version : null;
 
     public static bool CanSendRelease
     {
@@ -162,12 +166,13 @@ public static class ArchipelagoClient
 
                     UI.instance.UnPause();
                 }
+                CheckVersion().Forget();
             }
             else if (loginResult is LoginFailure loginFailure)
             {
                 Reset();
                 var message = $"Failed to connect to AP: {string.Join("\n", loginFailure.Errors)}";
-                APConsole?.AddLogMessage(new APConsoleLogEntry(message));
+                APConsole?.LogError(message);
                 CornKidzAP.Logger.LogError(message);
             }
         }
@@ -176,6 +181,16 @@ public static class ArchipelagoClient
             Reset();
             CornKidzAP.Logger.LogError($"Exception while trying to connect to AP: {e}");
         }
+    }
+
+    private static async UniTask CheckVersion()
+    {
+        CornKidzAP.Logger.LogDebug($"ServerVersion: {SlotData.ServerVersion}, ModVersion: {ModVersion}");
+        if (SlotData.ServerVersion != null && ModVersion != null && SlotData.ServerVersion == ModVersion) return;
+        var message = $"Warning:\nVersion mismatch between apworld version on Server and Mod:\nServer version: {SlotData.ServerVersion?.ToString() ?? "unknown (<0.0.4?)"} =/= Mod version: {ModVersion?.ToString() ?? "unknown"}.\nThis may cause issue, please up-/downgrade your mod accordingly unless you know what you're doing.";
+        CornKidzAP.Logger.LogWarning(message);
+        await Task.Delay(500); //small delay so we print after the initial connect messages
+        APConsole.LogWarning(message);
     }
 
     private static void Reset()
@@ -344,7 +359,7 @@ public static class ArchipelagoClient
         Reset();
         if (!string.IsNullOrEmpty(reason))
         {
-            APConsole?.AddLogMessage(new APConsoleLogEntry($"Disconnected from AP Server: {reason}"));
+            APConsole?.LogError($"Disconnected from AP Server: {reason}");
         }
     }
 
@@ -354,7 +369,7 @@ public static class ArchipelagoClient
         Reset();
         if (!string.IsNullOrEmpty(message))
         {
-            APConsole?.AddLogMessage(new APConsoleLogEntry(message));
+            APConsole?.LogError(message);
         }
     }
 
@@ -373,7 +388,7 @@ public static class ArchipelagoClient
         if (Session is { Socket.Connected: true })
             await Session.Socket.DisconnectAsync();
         Reset();
-        APConsole?.AddLogMessage(new APConsoleLogEntry("Disconnected from AP Server.", ConsoleLogType.Information));
+        APConsole?.LogInfo("Disconnected from AP Server.");
     }
 
     public static void SetGoalAchieved()

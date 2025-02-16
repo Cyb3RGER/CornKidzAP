@@ -82,7 +82,7 @@ public class APDeathLinkHandler : MonoBehaviour
             CornKidzAP.Logger.LogWarning("Tried to send death link with no death link service!");
         if (DateTime.Now - LastDeathLinkTime <= DeathLinkCooldown) return;
         CornKidzAP.Logger.LogDebug("Sending death link...");
-        ArchipelagoClient.APConsole.AddLogMessage(new APConsoleLogEntry("Sending death link...", ConsoleLogType.Information));
+        ArchipelagoClient.APConsole.LogInfo("Sending death link...");
         DeathLinkService?.SendDeathLink(new DeathLink(ArchipelagoClient.Session.Players.ActivePlayer.Name, "got corned"));
         LastDeathLinkTime = DateTime.Now;
     }
@@ -92,7 +92,7 @@ public class APDeathLinkHandler : MonoBehaviour
         DiedFromDeathLink = true;
         GameCtrl.instance.HP = 0;
         CornKidzAP.Logger.LogDebug($"Received death link: {deathlink.Source}: {deathlink.Cause} {deathlink.Timestamp}");
-        ArchipelagoClient.APConsole.AddLogMessage(new APConsoleLogEntry($"Received death link: {deathlink.Source}: {deathlink.Cause} ", ConsoleLogType.Information));
+        ArchipelagoClient.APConsole.LogInfo($"Received death link: {deathlink.Source}: {deathlink.Cause} ");
     }
 
     public void HandleDeathLink(DeathLink deathlink)

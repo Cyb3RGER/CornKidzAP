@@ -28,6 +28,12 @@ public class APConsole : MonoBehaviour
         pendingLogQueue.Enqueue(log);
     }
 
+    public void Log(string message, ConsoleLogType logType) => AddLogMessage(new APConsoleLogEntry(message, logType));
+    public void LogDebug(string message) => Log(message, ConsoleLogType.Debug);
+    public void LogInfo(string message) => Log(message, ConsoleLogType.Information);
+    public void LogWarning(string message) => Log(message, ConsoleLogType.Warning);
+    public void LogError(string message) => Log(message, ConsoleLogType.Error);
+
     private void ProcessLogQueue()
     {
         while (pendingLogQueue.Count > 0)
