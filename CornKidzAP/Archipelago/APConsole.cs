@@ -43,11 +43,7 @@ public class APConsole : MonoBehaviour
             {
                 logQueue.Dequeue();
             }
-            else
-            {
-                //if we remove beforehand we don't need to scroll
-                shouldScrollToEnd = scrollPos.y >= contentRect.height - scrollViewRect.height - scrollViewRect.height - lineHeight;
-            }
+            shouldScrollToEnd = shouldScrollToEnd || scrollPos.y >= contentRect.height - scrollViewRect.height - scrollViewRect.height - lineHeight;
 
             logQueue.Enqueue(log);
         }
