@@ -21,7 +21,6 @@ public enum APState
 
 public static class ArchipelagoClient
 {
-    public static readonly Version APVersion = new(0, 6, 0);
     private const string GameName = "Corn Kidz 64";
 
     private static ConcurrentQueue<ItemInfo> _itemQueue = new();
@@ -114,7 +113,7 @@ public static class ArchipelagoClient
                 GameName,
                 ConnectionInfo.SlotName,
                 ItemsHandlingFlags.AllItems,
-                APVersion,
+                null,
                 null,
                 "",
                 ConnectionInfo.Password);
@@ -144,8 +143,8 @@ public static class ArchipelagoClient
                 SlotData = new APSlotData(loginSuccess.SlotData);
                 Session.DataStorage.TrackClientStatus(Session_TrackPlayerStatus);
                 APDeathLinkHandler.DeathLinkService = Session.CreateDeathLinkService();
-                if (SlotData.IsDeathLink) APDeathLinkHandler.DeathLinkService.EnableDeathLink();
                 APDeathLinkHandler.DeathLinkService.OnDeathLinkReceived += APDeathLinkHandler.HandleDeathLink;
+                if (SlotData.IsDeathLink) APDeathLinkHandler.DeathLinkService.EnableDeathLink();
                 var copySettings = GameCtrl.instance.data.GetCopySettings();
                 GameCtrl.instance.ResetSav();
                 GameCtrl.instance.LoadGame();
