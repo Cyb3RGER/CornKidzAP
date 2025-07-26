@@ -44,7 +44,7 @@ public class MoveRandoPatches
     private static Action<CodeMatcher, Moves> DefaultPatchAction => (cm, move) =>
     {
         var inst = cm.Instruction;
-        CornKidzAP.Logger.LogDebug($"inst: {inst.opcode} {inst.operand}");
+        // CornKidzAP.Logger.LogDebug($"inst: {inst.opcode} {inst.operand}");
         var label = inst.operand;
         cm.Advance(1);
         cm.InsertAndAdvance(
@@ -59,7 +59,7 @@ public class MoveRandoPatches
 
     private static IEnumerable<CodeInstruction> FindAndPatchMatches(Moves move, IEnumerable<CodeInstruction> instructions, MovePatchInfo[] infos)
     {
-        CornKidzAP.Logger.LogDebug($"Patching PlayerCtrl.Run {move}");
+        // CornKidzAP.Logger.LogDebug($"Patching PlayerCtrl.Run {move}");
         var matcher = new CodeMatcher(instructions);
         for (var i = 0; i < infos.Length; i++)
         {
