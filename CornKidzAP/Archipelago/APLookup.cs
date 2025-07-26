@@ -14,230 +14,231 @@ public static class APLookup
 
     public static readonly Dictionary<long, int> APLocIdToSaveItemId = new()
     {
-        { BaseID + 0, 116 }, //XP Cube Near Slide
-        { BaseID + 1, 100 }, //XP Cube On Slide
-        { BaseID + 2, 118 }, //XP Cube Under Slide
-        { BaseID + 3, 113 }, //XP Cube Bouncy Moose
-        { BaseID + 4, 106 }, //XP Cube Park Top Hat
-        { BaseID + 5, 101 }, //XP Cube Park Water #1
-        { BaseID + 6, 102 }, //XP Cube Park Water #2
-        { BaseID + 7, 103 }, //XP Cube Park Behind Bomb-able Wall #1
-        { BaseID + 8, 104 }, //XP Cube Park Behind Bomb-able Wall #2
-        { BaseID + 9, 119 }, //XP Cube Park Across Lake under Bolder
-        { BaseID + 10, 105 }, //XP Cube Park Across Lake Boost Pad
-        { BaseID + 11, 122 }, //XP Cube Stone Statue #1
-        { BaseID + 12, 123 }, //XP Cube Stone Statue #2
-        { BaseID + 13, 124 }, //XP Cube Stone Statue #3
-        { BaseID + 14, 112 }, //XP Cube Park Fence
-        { BaseID + 15, 120 }, //XP Cube Lower Slam Pillar
-        { BaseID + 16, 121 }, //XP Cube Upper Slam Pillar
-        { BaseID + 17, 126 }, //XP Cube Attic Drill #1
-        { BaseID + 18, 127 }, //XP Cube Attic Drill #2
-        { BaseID + 19, 128 }, //XP Cube Attic Top Ledge #1
-        { BaseID + 20, 130 }, //XP Cube Attic Top Ledge #2
-        { BaseID + 21, 129 }, //XP Cube Attic Push Cube Hallway
-        { BaseID + 22, 117 }, //XP Cube House Bookcase
-        { BaseID + 23, 107 }, //XP Cube House Foyer #1
-        { BaseID + 24, 115 }, //XP Cube House Foyer #2
-        { BaseID + 25, 114 }, //XP Cube House Foyer #3
-        { BaseID + 26, 131 }, //XP Cube House Foyer Tower
-        { BaseID + 27, 125 }, //XP Cube Top Bouncy Moose
-        { BaseID + 28, 109 }, //XP Cube Top Boost Ring Challenge #1
-        { BaseID + 29, 110 }, //XP Cube Top Boost Ring Challenge #2
-        { BaseID + 30, 111 }, //XP Cube Top Boost Ring Challenge #3
-        { BaseID + 31, 108 }, //XP Cube Behind Bomb-able Wall Underground
-        { BaseID + 32, 135 }, //Red Screw Lake Bolder
-        { BaseID + 33, 137 }, //Red Screw Attic Screw Screw
-        { BaseID + 34, 136 }, //Red Screw Attic Drill
-        { BaseID + 35, 134 }, //Red Screw Above Crank
-        { BaseID + 36, 138 }, //Red Screw House Foyer
-        { BaseID + 37, 133 }, //Red Screw Top Wall Jump Challenge
-        { BaseID + 38, 139 }, //Chameleon Moth Bush
-        { BaseID + 39, 140 }, //Chameleon Moth Painting
-        { BaseID + 40, 143 }, //XP Crystal Park Attic
-        { BaseID + 41, 144 }, //XP Crystal Garbage Grump
-        { BaseID + 42, 142 }, //Crazy Mirror Sewers
-        { BaseID + 43, 141 }, //Crazy Mirror Foyer Level 3
-        { BaseID + 44, 132 }, //Crank Across Lake
-        { BaseID + 45, 152 }, //Trash Can
-        { BaseID + 46, 153 }, //Trash Can Attic #1
-        { BaseID + 47, 151 }, //Trash Can Attic #2
-        { BaseID + 48, 148 }, //Trash Can Sewers
-        { BaseID + 49, 155 }, //Trash Can Foyer
-        { BaseID + 50, 150 }, //Trash Can Park Top
-        { BaseID + 51, 149 }, //Trash Can Top Wall Jump Challenge
-        { BaseID + 52, 154 }, //Trash Can Foyer Level 3
-        { BaseID + 53, 254 }, //XP Cube Hollow Bridge #1
-        { BaseID + 54, 275 }, //XP Cube Hollow Bridge #2
-        { BaseID + 55, 276 }, //XP Cube Hollow Bridge #3
-        { BaseID + 56, 209 }, //XP Cube Hollow On Trees
-        { BaseID + 57, 225 }, //XP Cube Hollow Leaves Under Owl Tree
-        { BaseID + 58, 226 }, //XP Cube Hollow Leaves On Owl Tree
-        { BaseID + 59, 216 }, //XP Cube Hollow Pillar #1
-        { BaseID + 60, 217 }, //XP Cube Hollow Pillar #2
-        { BaseID + 61, 266 }, //XP Cube Hollow Trampoline
-        { BaseID + 62, 232 }, //XP Cube Hollow Trinket Shop
-        { BaseID + 63, 231 }, //XP Cube Hollow Clock Wall Climb #1
-        { BaseID + 64, 230 }, //XP Cube Hollow Clock Wall Climb #2
-        { BaseID + 65, 224 }, //XP Cube Hollow Pillar Outside Church
-        { BaseID + 66, 265 }, //XP Cube Hollow Clockwise Vomit
-        { BaseID + 67, 215 }, //XP Cube Hollow Fart Tunnel #1
-        { BaseID + 68, 214 }, //XP Cube Hollow Fart Tunnel #2
-        { BaseID + 69, 233 }, //XP Cube Hollow Church Pillar
-        { BaseID + 70, 255 }, //XP Cube Hollow Window #1
-        { BaseID + 71, 271 }, //XP Cube Hollow Window #2
-        { BaseID + 72, 273 }, //XP Cube Hollow Graveyard Pole #1
-        { BaseID + 73, 261 }, //XP Cube Hollow Graveyard Tree Branch
-        { BaseID + 74, 274 }, //XP Cube Hollow Graveyard Pole #2
-        { BaseID + 75, 253 }, //XP Cube Hollow Graveyard Behind Tree Stump
-        { BaseID + 76, 256 }, //XP Cube Hollow Graveyard Water
-        { BaseID + 77, 262 }, //XP Cube Hollow Graveyard Tombstone Code #1 (12311321)
-        { BaseID + 78, 263 }, //XP Cube Hollow Graveyard Tombstone Code #2 (23111323)
-        { BaseID + 79, 264 }, //XP Cube Hollow Graveyard Tombstone Code #3 (21132113)
-        { BaseID + 80, 210 }, //XP Cube Hollow Balcony #1
-        { BaseID + 81, 211 }, //XP Cube Hollow Balcony #2
-        { BaseID + 82, 218 }, //XP Cube Hollow Near Bats #1
-        { BaseID + 83, 219 }, //XP Cube Hollow Near Bats #2
-        { BaseID + 84, 242 }, //XP Cube Hollow Drill Room #1
-        { BaseID + 85, 244 }, //XP Cube Hollow Drill Room #2
-        { BaseID + 86, 246 }, //XP Cube Hollow Drill Room #3
-        { BaseID + 87, 248 }, //XP Cube Hollow Drill Under Ramp
-        { BaseID + 88, 220 }, //XP Cube Hollow Drill Bars #1
-        { BaseID + 89, 221 }, //XP Cube Hollow Drill Bars #2
-        { BaseID + 90, 236 }, //XP Cube Hollow Drill Under Church #1
-        { BaseID + 91, 238 }, //XP Cube Hollow Drill Under Church #2
-        { BaseID + 92, 212 }, //XP Cube Hollow Drill Dragon Mountainside #1
-        { BaseID + 93, 213 }, //XP Cube Hollow Drill Dragon Mountainside #2
-        { BaseID + 94, 222 }, //XP Cube Hollow Haunted House Top #1
-        { BaseID + 95, 223 }, //XP Cube Hollow Haunted House Top #2
-        { BaseID + 96, 272 }, //XP Cube Hollow Haunted House Behind Chimney
-        { BaseID + 97, 229 }, //XP Cube Hollow Ravine under Climbing Ledge
-        { BaseID + 98, 227 }, //XP Cube Hollow Ravine on Vine
-        { BaseID + 99, 228 }, //XP Cube Hollow Ravine under Vine
-        { BaseID + 100, 277 }, //XP Cube Hollow Fenced Across Ravine
-        { BaseID + 101, 278 }, //XP Cube Hollow Music Box Swim #1
-        { BaseID + 102, 279 }, //XP Cube Hollow Music Box Swim #2
-        { BaseID + 103, 234 }, //XP Cube Hollow Brick Wall #1
-        { BaseID + 104, 235 }, //XP Cube Hollow Brick Wall #2
-        { BaseID + 105, 240 }, //XP Cube Hollow Behind Sanitary Zoo
-        { BaseID + 106, 252 }, //XP Cube Hollow Spider Outside Zoo
-        { BaseID + 107, 250 }, //XP Cube Dragon Crank Drill
-        { BaseID + 108, 267 }, //XP Cube Fountain Swim #1
-        { BaseID + 109, 268 }, //XP Cube Fountain Swim #2
-        { BaseID + 110, 269 }, //XP Cube Fountain Swim #3
-        { BaseID + 111, 270 }, //XP Cube Fountain Swim #4
-        { BaseID + 112, 257 }, //XP Cube Tree Fish Timer
-        { BaseID + 113, 259 }, //XP Cube Tree Swim
-        { BaseID + 114, 258 }, //XP Cube Tree Near Metal Worm
-        { BaseID + 115, 260 }, //XP Cube Graveyard Spider Cave Drill
-        { BaseID + 116, 203 }, //Red Screw (Hollow Town Clock)
-        { BaseID + 117, 200 }, //Red Screw (Hollow Drill Tower Alcove)
-        { BaseID + 118, 202 }, //Red Screw (Hollow Behind Haunted House)
-        { BaseID + 119, 208 }, //Red Screw (Hollow Dragon Cave)
-        { BaseID + 120, 201 }, //Red Screw (Hollow Large Crank Pit)
-        { BaseID + 121, 207 }, //Red Screw (Hollow Zoo)
-        { BaseID + 122, 204 }, //Red Screw (Flipped Hollow Tree Side Room)
-        { BaseID + 123, 205 }, //Red Screw (Hollow Tree High Screw)
-        { BaseID + 124, 206 }, //Red Screw (Hollow Tree Low Screw)
-        { BaseID + 125, 297 }, //Chameleon Moth (Hollow Bush)
-        { BaseID + 126, 296 }, //Chameleon Moth (Hollow Graveyard)
-        { BaseID + 127, 283 }, //XP Crystal (Hollow Timed Fountain)
-        { BaseID + 128, 282 }, //XP Crystal (Hollow Church Bell)
-        { BaseID + 129, 291 }, //XP Crystal (Hollow Graveyard Spider Reward)
-        { BaseID + 130, 286 }, //XP Crystal (Hollow Drill Pillar)
-        { BaseID + 131, 285 }, //XP Crystal (Hollow Haunted House Free Bird)
-        { BaseID + 132, 295 }, //XP Crystal (Hollow Dragon Cave)
-        { BaseID + 133, 280 }, //XP Crystal (Hollow Above Entry)
-        { BaseID + 134, 292 }, //XP Crystal (Hollow Zombie Chamber)
-        { BaseID + 135, 294 }, //XP Crystal (Hollow Free Stuck Pig)
-        { BaseID + 136, 281 }, //XP Crystal (Hollow Bomb Church Pillar)
-        { BaseID + 137, 293 }, //XP Crystal (Flipped Hollow Counterclockwise Vomit)
-        { BaseID + 138, 287 }, //XP Crystal (Flipped Hollow Gassy Moosey)
-        { BaseID + 139, 289 }, //Crazy Mirror (Hollow Graveyard)
-        { BaseID + 140, 284 }, //Crazy Mirror (Hollow Zoo-Side Crank)
-        { BaseID + 141, 288 }, //Crazy Mirror (Flipped Hollow Dragon Crank)
-        { BaseID + 142, 290 }, //Crazy Mirror (Zoo Metal Worm)
-        { BaseID + 143, 298 }, //Crank (Hollow Haunted House Ground Floor)
-        { BaseID + 144, 299 }, //Crank (Hollow Ravine)
-        { BaseID + 145, 306 }, //Disco Ball (Hollow Trinket Shop)
-        { BaseID + 146, 300 }, //Disco Ball (Hollow Dragon Chest)
-        { BaseID + 147, 308 }, //Disco Ball (Hollow Music Box)
-        { BaseID + 148, 302 }, //Disco Ball (Hollow Zombie Chamber)
-        { BaseID + 149, 304 }, //Disco Ball (Hollow Clean Zoo)
-        { BaseID + 150, 319 }, //Bottle Cap (Hollow Graveyard)
-        { BaseID + 151, 317 }, //Bottle Cap (Hollow Graveyard Inside Tree Stump)
-        { BaseID + 152, 311 }, //Bottle Cap (Hollow Ravine Climb)
-        { BaseID + 153, 313 }, //Bottle Cap (Hollow Zoo Rooftop)
-        { BaseID + 154, 315 }, //Bottle Cap (Hollow Zoo-Side Crank)
-        { BaseID + 155, 146 }, //Void Screw (Park House)
-        { BaseID + 156, 324 }, //Void Screw (Hollow Outside Trinket Shop)
-        { BaseID + 157, 321 }, //Void Screw (Hollow Church)
-        { BaseID + 158, 323 }, //Void Screw (Hollow Sky)
-        { BaseID + 159, 501 }, //Void Screw (Some Other Place)
-        { BaseID + 160, 322 }, //Void Screw (Tree)
-        { BaseID + 161, 325 }, //Void Screw (Kill Fish)
-        { BaseID + 162, 145 }, //Void Screw (Park Top Hat)
-        { BaseID + 163, 147 }, //Void Screw (Park Out of Bounds)
-        { BaseID + 164, 411 }, //Void Screw (Anxiety Tower #1)
-        { BaseID + 165, 412 }, //Void Screw (Anxiety Tower #2)
-        { BaseID + 166, 414 }, //Crank (Anxiety Tower)
-        { BaseID + 167, 326 }, //Mega Dream Soda #1
-        { BaseID + 168, 500 }, //Mega Dream Soda #2
-        { BaseID + 171, 310 }, //Cheese Grater
+        { BaseID + 0, 116 }, //Park Outside: XP Cube Near Slide
+        { BaseID + 1, 100 }, //Park Outside: XP Cube On Slide
+        { BaseID + 2, 118 }, //Park Outside: XP Cube Under Slide
+        { BaseID + 3, 113 }, //Park Outside: XP Cube Bouncy Moose Near Alexis
+        { BaseID + 4, 106 }, //Park Outside: XP Cube Above Top Hat
+        { BaseID + 5, 101 }, //Park Outside: XP Cube Underwater #2
+        { BaseID + 6, 102 }, //Park Outside: XP Cube Underwater #1
+        { BaseID + 7, 103 }, //Park Outside: XP Cube Behind Cracked Wall 2
+        { BaseID + 8, 104 }, //Park Outside: XP Cube Behind Cracked Wall 1
+        { BaseID + 9, 119 }, //Park Outside: XP Cube Inside Boulder
+        { BaseID + 10, 105 }, //Park Outside: XP Cube Above Boost Pad
+        { BaseID + 11, 122 }, //Park Outside: XP Cube From Stone Statue 1
+        { BaseID + 12, 123 }, //Park Outside: XP Cube From Stone Statue 2
+        { BaseID + 13, 124 }, //Park Outside: XP Cube From Stone Statue 3
+        { BaseID + 14, 112 }, //Park Outside: XP Cube Near Upper Fence
+        { BaseID + 15, 120 }, //Park Outside: XP Cube Behind Slam Pillar
+        { BaseID + 16, 121 }, //Park Outside: XP Cube Above Slam Pillar
+        { BaseID + 17, 126 }, //Park Attic: XP Cube Behind Dirt 1
+        { BaseID + 18, 127 }, //Park Attic: XP Cube Behind Dirt 2
+        { BaseID + 19, 128 }, //Park Attic: XP Cube On Top Ledge 1
+        { BaseID + 20, 130 }, //Park Attic: XP Cube On Top Ledge 2
+        { BaseID + 21, 129 }, //Park Attic: XP Cube Slam Block Hallway
+        { BaseID + 22, 117 }, //Park Inside: XP Cube Behind Bookcase
+        { BaseID + 23, 107 }, //Park Inside: XP Cube On Wall Platform
+        { BaseID + 24, 115 }, //Park Inside: XP Cube In Cage
+        { BaseID + 25, 114 }, //Park Inside: XP Cube On Pole
+        { BaseID + 26, 131 }, //Park Inside: XP Cube In Leaf Tunnel
+        { BaseID + 27, 125 }, //Park Outside: XP Cube Bouncy Moose On Roof
+        { BaseID + 28, 109 }, //Park Outside: XP Cube Above Boost Rings 1
+        { BaseID + 29, 110 }, //Park Outside: XP Cube Above Boost Rings 2
+        { BaseID + 30, 111 }, //Park Outside: XP Cube Above Boost Rings 3
+        { BaseID + 31, 108 }, //Park Outside: XP Cube Behind Cracked Wall 3
+        { BaseID + 32, 135 }, //Park Outside: Red Screw Under Boulder
+        { BaseID + 33, 137 }, //Park Attic: Red Screw Near Trash Can 1
+        { BaseID + 34, 136 }, //Park Attic: Red Screw At Top
+        { BaseID + 35, 134 }, //Park Outside: Red Screw Above Inside Entrance
+        { BaseID + 36, 138 }, //Park Inside: Red Screw Behind Loose Wall Panel
+        { BaseID + 37, 133 }, //Park Outside: Red Screw Across Jump Pads
+        { BaseID + 38, 139 }, //Park Outside: Chameleon Moth Bush
+        { BaseID + 39, 140 }, //Park Inside: Chameleon Moth Painting
+        { BaseID + 40, 143 }, //Park Attic: XP Crystal
+        { BaseID + 41, 144 }, //Park Outside: XP Crystal From Garbage Grump
+        { BaseID + 42, 142 }, //Park Outside: Crazy Mirror - Climb To The Top
+        { BaseID + 43, 141 }, //Park Inside: Crazy Mirror - Bounce To The Top
+        { BaseID + 44, 132 }, //Park Outside: Crank In Chest
+        { BaseID + 45, 152 }, //Park Outside: Trash Can Near Top Hat
+        { BaseID + 46, 153 }, //Park Attic: Trash Can 1
+        { BaseID + 47, 151 }, //Park Attic: Trash Can 2
+        { BaseID + 48, 148 }, //Park Outside: Trash Can Near Garbage Grump
+        { BaseID + 49, 155 }, //Park Inside: Trash Can Near XP Cube In Cage
+        { BaseID + 50, 150 }, //Park Outside: Trash Can On Roof
+        { BaseID + 51, 149 }, //Park Outside: Trash Can Across Jump Pads
+        { BaseID + 52, 154 }, //Park Inside: Trash Can Behind Level 3 Door
+        { BaseID + 53, 254 }, //Hollow: XP Cube Bridge 1
+        { BaseID + 54, 275 }, //Hollow: XP Cube Bridge 2
+        { BaseID + 55, 276 }, //Hollow: XP Cube Bridge 3
+        { BaseID + 56, 209 }, //Hollow: XP Cube On Trees
+        { BaseID + 57, 225 }, //Hollow: XP Cube By Owlloh 1
+        { BaseID + 58, 226 }, //Hollow: XP Cube By Owlloh 2
+        { BaseID + 59, 216 }, //Hollow: XP Cube Pillar By Music Box 1
+        { BaseID + 60, 217 }, //Hollow: XP Cube Pillar By Music Box 2
+        { BaseID + 61, 266 }, //Hollow: XP Cube Above Bouncy Leaf
+        { BaseID + 62, 232 }, //Hollow: XP Cube In Trinket Shop
+        { BaseID + 63, 231 }, //Hollow: XP Cube On Ledge By Clock 1
+        { BaseID + 64, 230 }, //Hollow: XP Cube On Ledge By Clock 2
+        { BaseID + 65, 224 }, //Hollow: XP Cube On Pillar Outside Church
+        { BaseID + 66, 265 }, //Hollow: XP Cube Merry-Go-Round Pig
+        { BaseID + 67, 215 }, //Hollow: XP Cube Gas Tunnel 1
+        { BaseID + 68, 214 }, //Hollow: XP Cube Gas Tunnel 2
+        { BaseID + 69, 233 }, //Hollow: XP Cube On Pole In Church
+        { BaseID + 70, 255 }, //Hollow: XP Cube Inside Church Window 1
+        { BaseID + 71, 271 }, //Hollow: XP Cube Inside Church Window 2
+        { BaseID + 72, 273 }, //Hollow Graveyard: XP Cube On Pole 1
+        { BaseID + 73, 261 }, //Hollow Graveyard: XP Cube On Snippins Tree
+        { BaseID + 74, 274 }, //Hollow Graveyard: XP Cube On Pole 2
+        { BaseID + 75, 253 }, //Hollow Graveyard: XP Cube Above Fish
+        { BaseID + 76, 256 }, //Hollow Graveyard: XP Cube Underwater By Fish
+        { BaseID + 77, 262 }, //Hollow Graveyard: XP Cube Tombstone Code 1 (12311321)
+        { BaseID + 78, 263 }, //Hollow Graveyard: XP Cube Tombstone Code 2 (23111323)
+        { BaseID + 79, 264 }, //Hollow Graveyard: XP Cube Tombstone Code 3 (21132113)
+        { BaseID + 80, 210 }, //Hollow: XP Cube Balcony By Climbable Tree 1
+        { BaseID + 81, 211 }, //Hollow: XP Cube Balcony By Climbable Tree 2
+        { BaseID + 82, 218 }, //Hollow: XP Cube On Bat Tower 1
+        { BaseID + 83, 219 }, //Hollow: XP Cube On Bat Tower 2
+        { BaseID + 84, 242 }, //Hollow: XP Cube Inside Drill Tower 1
+        { BaseID + 85, 244 }, //Hollow: XP Cube Inside Drill Tower 2
+        { BaseID + 86, 246 }, //Hollow: XP Cube Inside Drill Tower 3
+        { BaseID + 87, 248 }, //Hollow: XP Cube Under Ramp By Music Box
+        { BaseID + 88, 220 }, //Hollow: XP Cube Behind Bars 1
+        { BaseID + 89, 221 }, //Hollow: XP Cube Behind Bars 2
+        { BaseID + 90, 236 }, //Hollow: XP Cube Under Church Stairs 1
+        { BaseID + 91, 238 }, //Hollow: XP Cube Under Church Stairs 2
+        { BaseID + 92, 212 }, //Hollow Graveyard: XP Cube In Dirt Below Dragon 1
+        { BaseID + 93, 213 }, //Hollow Graveyard: XP Cube In Dirt Below Dragon 2
+        { BaseID + 94, 222 }, //Hollow Graveyard: XP Cube On House Roof 1
+        { BaseID + 95, 223 }, //Hollow Graveyard: XP Cube On House Roof 2
+        { BaseID + 96, 272 }, //Hollow Graveyard: XP Cube Inside House Behind Chimney
+        { BaseID + 97, 229 }, //Hollow Ravine: XP Cube Between Wallgrab Points
+        { BaseID + 98, 227 }, //Hollow Ravine: XP Cube On Vine 1
+        { BaseID + 99, 228 }, //Hollow Ravine: XP Cube On Vine 2
+        { BaseID + 100, 277 }, //Hollow: XP Cube In Box Across Ravine
+        { BaseID + 101, 278 }, //Hollow: XP Cube In Music Box 1
+        { BaseID + 102, 279 }, //Hollow: XP Cube In Music Box 2
+        { BaseID + 103, 234 }, //Hollow: XP Cube On Wall By Merry-Go-Round 1
+        { BaseID + 104, 235 }, //Hollow: XP Cube On Wall By Merry-Go-Round 2
+        { BaseID + 105, 240 }, //Hollow: XP Cube Behind Sanitary Zoo
+        { BaseID + 106, 252 }, //Hollow: XP Cube On Tree Near Zoo
+        { BaseID + 107, 250 }, //Hollow Reversed: XP Cube Under Dragon Elevator
+        { BaseID + 108, 267 }, //Hollow Reversed: XP Cube In Fountain 1
+        { BaseID + 109, 268 }, //Hollow Reversed: XP Cube In Fountain 2
+        { BaseID + 110, 269 }, //Hollow Reversed: XP Cube In Fountain 3
+        { BaseID + 111, 270 }, //Hollow Reversed: XP Cube In Fountain 4
+        { BaseID + 112, 257 }, //Hollow: Inside The Tree XP Cube Fish Timer
+        { BaseID + 113, 259 }, //Hollow: Inside The Tree XP Cube Under Tree
+        { BaseID + 114, 258 }, //Hollow: Inside The Tree XP Cube Near Metal Worm
+        { BaseID + 115, 260 }, //Hollow Graveyard: XP Cube Above Ma Spider Coffin
+        { BaseID + 116, 203 }, //Hollow: Red Screw Above Clock
+        { BaseID + 117, 200 }, //Hollow: Red Screw In Alcove Under Drill Tower Entrance
+        { BaseID + 118, 202 }, //Hollow Graveyard: Red Screw Behind House
+        { BaseID + 119, 208 }, //Hollow Graveyard: Red Screw In Dragon Cave
+        { BaseID + 120, 201 }, //Hollow: Red Screw Near Rotatable Pillar
+        { BaseID + 121, 207 }, //Hollow Zoo: Red Screw
+        { BaseID + 122, 204 }, //Hollow Reversed: Red Screw Inside The Tree Side Entrance
+        { BaseID + 123, 205 }, //Hollow: Inside The Tree Red Screw By Snippins Stump
+        { BaseID + 124, 206 }, //Hollow: Inside The Tree Red Screw Above Bridge
+        { BaseID + 125, 297 }, //Hollow: Chameleon Moth Bush
+        { BaseID + 126, 296 }, //Hollow Graveyard: Chameleon Moth Gravestone
+        { BaseID + 127, 283 }, //Hollow: XP Crystal Above Fountain
+        { BaseID + 128, 282 }, //Hollow: XP Crystal On Church Roof
+        { BaseID + 129, 291 }, //Hollow Graveyard: XP Crystal Reward From Ipsam Jr.
+        { BaseID + 130, 286 }, //Hollow: XP Crystal In Cage Near Music Box
+        { BaseID + 131, 285 }, //Hollow Graveyard: XP Crystal In House 1st Floor Behind Painting
+        { BaseID + 132, 295 }, //Hollow Graveyard: XP Crystal From Dragon
+        { BaseID + 133, 280 }, //Hollow: XP Crystal Above Entrance
+        { BaseID + 134, 292 }, //Hollow: XP Crystal In Zombie Chamber
+        { BaseID + 135, 294 }, //Hollow: XP Crystal Pig Stuck In Owl Pellet
+        { BaseID + 136, 281 }, //Hollow: XP Crystal In Cracked Pillar Outside Church
+        { BaseID + 137, 293 }, //Hollow Reversed: XP Crystal Merry-Go-Round Pig
+        { BaseID + 138, 287 }, //Hollow Reversed: XP Crystal Behind Bluwinkle In Trinket Shop
+        { BaseID + 139, 289 }, //Hollow Graveyard: Crazy Mirror - Catch The Cans
+        { BaseID + 140, 284 }, //Hollow: Crazy Mirror - Dig To The Top
+        { BaseID + 141, 288 }, //Hollow Reversed: Crazy Mirror - Light The Cubes!
+        { BaseID + 142, 290 }, //Hollow Zoo: Crazy Mirror - Land Safely
+        { BaseID + 143, 298 }, //Hollow Graveyard: Crank In House 1st Floor
+        { BaseID + 144, 299 }, //Hollow Ravine: Crank
+        { BaseID + 145, 306 }, //Hollow: Disco Ball In Trinket Shop
+        { BaseID + 146, 300 }, //Hollow: Disco Ball Above Dragon
+        { BaseID + 147, 308 }, //Hollow: Disco Ball Above Music Box
+        { BaseID + 148, 302 }, //Hollow: Disco Ball In Zombie Chamber
+        { BaseID + 149, 304 }, //Hollow: Disco Ball Clean Zoo
+        { BaseID + 150, 319 }, //Hollow Graveyard: Bottle Cap On Ma Spider Gravestone
+        { BaseID + 151, 317 }, //Hollow Graveyard: Bottle Cap In Fish Tree Stump
+        { BaseID + 152, 311 }, //Hollow Ravine: Bottle Cap
+        { BaseID + 153, 313 }, //Hollow: Bottle Cap On Zoo Roof
+        { BaseID + 154, 315 }, //Hollow: Bottle Cap In Cage Near Zoo
+        { BaseID + 155, 146 }, //Park Inside: Void Screw Near Bookcase
+        { BaseID + 156, 324 }, //Hollow: Void Screw Outside Trinket Shop
+        { BaseID + 157, 321 }, //Hollow: Void Screw At Top Of Church
+        { BaseID + 158, 323 }, //Hollow: Void Screw In Sky
+        { BaseID + 159, 501 }, //Some Other Place: Void Screw
+        { BaseID + 160, 322 }, //Hollow: Inside The Tree Void Screw
+        { BaseID + 161, 325 }, //Hollow: Void Screw In Zombie Chamber All Fish Killed
+        { BaseID + 162, 145 }, //Park Outside: Void Screw Under Top Hat
+        { BaseID + 163, 147 }, //Park Outside: Void Screw Out Of Bounds
+        { BaseID + 164, 411 }, //Anxiety Tower: Void Screw 1
+        { BaseID + 165, 412 }, //Anxiety Tower: Void Screw 2
+        { BaseID + 166, 414 }, //Anxiety Tower: Crank
+        { BaseID + 167, 326 }, //Hollow: Mega Dream Soda
+        { BaseID + 168, 500 }, //Some Other Place: Mega Dream Soda
+        { BaseID + 171, 310 }, //Hollow Graveyard: Cheese Grater In Ma Spider Grave
     };
 
     public static readonly Dictionary<long, int> APLocIdToUpgradeId = new()
     {
-        { BaseID + 169, 1 }, //Drill
-        { BaseID + 170, 2 }, //Fall Warp
+        { BaseID + 169, 1 }, //Hollow: Drill
+        { BaseID + 170, 2 }, //Hollow: Fall Warp
     };
 
     public static readonly Dictionary<long, int> APLocIdToAchievementId = new()
     {
-        { BaseID + 181, 1 }, //Little Corn Cadet
-        { BaseID + 182, 2 }, //XP-ansion Pak
-        { BaseID + 183, 3 }, //maXPower
-        { BaseID + 184, 4 }, //...I'm a Lasagna Hog
-        { BaseID + 185, 5 }, //Get N(achos) or Get Out
-        { BaseID + 186, 6 }, //Anxiety Attack
-        { BaseID + 187, 7 }, //Private Screw'l
-        { BaseID + 188, 8 }, //Annoyed the Void
-        { BaseID + 189, 9 }, //High Bread Heaven
-        { BaseID + 190, 10 }, //Smoking Kills
-        { BaseID + 191, 11 }, //Magical Tetnis Challenge
-        { BaseID + 192, 12 }, //Corn Syrup
-        { BaseID + 193, 13 }, //Feast Fit For a Kid
-        { BaseID + 194, 14 }, //Heroes in a Whole Shell
-        { BaseID + 195, 15 }, //Highdive
+        { BaseID + 182, 1 }, //Achievement: Little Corn Cadet
+        { BaseID + 183, 2 }, //Achievement: XP-ansion Pak
+        { BaseID + 184, 3 }, //Achievement: maXPower
+        { BaseID + 185, 4 }, //Achievement: ...I'm a Lasagna Hog
+        { BaseID + 186, 5 }, //Achievement: Get N(achos) or Get Out
+        { BaseID + 187, 6 }, //Achievement: Anxiety Attack
+        { BaseID + 188, 7 }, //Achievement: Private Screw'l
+        { BaseID + 189, 8 }, //Achievement: Annoyed the Void
+        { BaseID + 190, 9 }, //Achievement: High Bread Heaven
+        { BaseID + 191, 10 }, //Achievement: Smoking Kills
+        { BaseID + 192, 11 }, //Achievement: Magical Tetnis Challenge
+        { BaseID + 193, 12 }, //Achievement: Corn Syrup
+        { BaseID + 194, 13 }, //Achievement: Feast Fit For a Kid
+        { BaseID + 195, 14 }, //Achievement: Heroes in a Whole Shell
+        { BaseID + 196, 15 }, //Achievement: Highdive
     };
 
-    private static readonly Dictionary<long, int> APLocIdToSwitchId = new()
+    public static readonly Dictionary<long, int> APLocIdToSwitchId = new()
     {
-        { BaseID + 172, 236 }, //Metal Worm
-        { BaseID + 202, 238 }, //Fish Graveyard Tree Stump
-        { BaseID + 203, 239 }, //Fish Owl Tree #1
-        { BaseID + 204, 240 }, //Fish Owl Tree #2
+        { BaseID + 172, 236 }, //Hollow: Inside The Tree Metal Worm
+        { BaseID + 203, 238 }, //Hollow Graveyard: Fish Killed
+        { BaseID + 204, 239 }, //Hollow: Inside The Tree Fish 1
+        { BaseID + 205, 240 }, //Hollow: Inside The Tree Fish 2
     };
 
-    private static readonly Dictionary<long, int> APLocIdToRatIndex = new()
+    public static readonly Dictionary<long, int> APLocIdToRatIndex = new()
     {
-        { BaseID + 196, 0 }, //Rat Above Fresh Air
-        { BaseID + 197, 1 }, //Rat Sand Cage
-        { BaseID + 198, 2 }, //Rat Near Entrance Next To Fence
-        { BaseID + 199, 3 }, //Rat Wall Cage
-        { BaseID + 200, 4 }, //Rat In Cage Above Entrance
-        { BaseID + 201, 5 }, //Rat Grass Area
+        { BaseID + 197, 0 }, //Hollow Zoo: Rat Above Fresh Air
+        { BaseID + 198, 1 }, //Hollow Zoo: Rat In Sand Cage
+        { BaseID + 199, 2 }, //Hollow Zoo: Rat On Metal Worm Enclosure
+        { BaseID + 200, 3 }, //Hollow Zoo: Rat In Wall Cage
+        { BaseID + 201, 4 }, //Hollow Zoo: Rat In Cage Above Entrance
+        { BaseID + 202, 5 }, //Hollow Zoo: Rat By Grass Hill
     };
 
-    private static readonly Dictionary<long, string> APLocIdToString = new()
+    public static readonly Dictionary<long, string> APLocIdToString = new()
     {
-        { BaseID + 173, "OH DEAR GOD! THIS GUY WAS A SICKO!!" }, //OH DEAR GOD! THIS GUY WAS A SICKO!!
-        { BaseID + 174, "HOWDY" }, //HOWDY
-        { BaseID + 175, "CAN SOMEBODY TELL ME WHAT THESE STUPID DUCK THINGS EVEN ARE?" }, //CAN SOMEBODY TELL ME WHAT THESE STUPID DUCK THINGS EVEN ARE?
-        { BaseID + 176, "DANG... WHY COULDN'T I HAVE BEEN TRAPPED IN A REOCCURING DREAM WITH HER INSTEAD OF ALEXIS?" }, //DANG...
-        { BaseID + 205, "WEAR BLUE HEADBAND + SHIRT?" }, //Blue Headband
-        { BaseID + 206, "WEAR GREEN HEADBAND + SHIRT?" }, //Green Headband
-        { BaseID + 207, "WEAR BLACK HEADBAND + SHIRT?" }, //Black Headband
+        { BaseID + 173, "OH DEAR GOD! THIS GUY WAS A SICKO!!" }, //Hollow Graveyard: OH DEAR GOD! THIS GUY WAS A SICKO!!
+        { BaseID + 174, "HOWDY" }, //Hollow Zoo: HOWDY (Greet Metal Worm)
+        { BaseID + 175, "CAN SOMEBODY TELL ME WHAT THESE STUPID DUCK THINGS EVEN ARE?" }, //Some Other Place: STUPID DUCK THING
+        { BaseID + 176, "DANG... WHY COULDN'T I HAVE BEEN TRAPPED IN A REOCCURING DREAM WITH HER INSTEAD OF ALEXIS?" }, //Some Other Place: Sybil Painting
+        { BaseID + 177, "WHAT IS THIS? ALEXIS STEALING MY CLOTHES?" }, //Some Other Place: Ally Painting
+        { BaseID + 206, "WEAR BLUE HEADBAND + SHIRT?" }, //Some Other Place: Blue Headband
+        { BaseID + 207, "WEAR GREEN HEADBAND + SHIRT?" }, //Some Other Place: Green Headband
+        { BaseID + 208, "WEAR BLACK HEADBAND + SHIRT?" }, //Anxiety Tower: Black Headband Under Entrance Soda Machine
     };
 
 
