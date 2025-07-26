@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using JetBrains.Annotations;
@@ -14,6 +15,7 @@ public class ArchipelagoData
     public int Rats { get; set; }
     public int Fish { get; set; }
     public string LastScene { get; set; }
+    public Dictionary<Moves, bool> Moves { get; set; } = Enum.GetValues(typeof(Moves)).Cast<Moves>().ToDictionary(x => x, x => false);
 
     [JsonConstructor]
     public ArchipelagoData()
@@ -76,6 +78,12 @@ public class ArchipelagoData
         }
         var fileName = $"APSave_{ArchipelagoClient.ConnectionInfo.SlotName}_{ArchipelagoClient.Session.RoomState.Seed}.json";
         return Path.GetInvalidFileNameChars().Aggregate(fileName, (current, invalidChar) => current.Replace(invalidChar, '_'));
+    }
+
+    public bool HasMove(Moves move)
+    {
+        Moves.TryGetValue(move, out var result);
+        return result;
     }
     
 }

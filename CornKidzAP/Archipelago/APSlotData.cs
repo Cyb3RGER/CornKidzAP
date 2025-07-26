@@ -49,5 +49,6 @@ public class APSlotData(Dictionary<string, object> slotData)
     public bool IsFishsanity => GetInt("fishsanity") > 0;
     
     public bool IsDeathLink => GetInt("death_link") > 0;
-    public bool IsOpenMode => GetInt("open_mode") > 0;
+    public bool IsOpenWollowsHollow => GetInt("open_wollows_hollow") > 0;
+    public bool IsMovesanity => GetInt("movesanity") > 0;
 }

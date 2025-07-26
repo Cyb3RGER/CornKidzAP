@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,12 +21,15 @@ public class APMainMenuTrackerUI : MonoBehaviour
     private Font _font;
     private GridLayoutGroup _grid;
     private Image _image;
-    private GameObject[] _rows = new GameObject[6];
+    private GameObject[] _rows = new GameObject[14];
     public GameObject HUDObject;
+    
+    private const string noString = "-";
+    private const string yesString = "X";
 
     public void Awake()
     {
-        _font = UI.instance.transform.Find("Objective").GetComponent<Text>().font;
+        _font = UI.instance.transform.Find("crankCounter").GetComponent<Text>().font;
         HUDObject = new GameObject("APMainMenuHUD")
         {
             layer = LayerMask.NameToLayer("UI")
@@ -49,18 +53,27 @@ public class APMainMenuTrackerUI : MonoBehaviour
         sizeFitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
         sizeFitter.horizontalFit = ContentSizeFitter.FitMode.PreferredSize;
         _grid = HUDObject.AddComponent<GridLayoutGroup>();
-        _grid.cellSize = new(80, 20);
-        _grid.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
-        _grid.spacing = new Vector2(0, -7);
+        _grid.cellSize = new(76, 18);
+        _grid.constraint = GridLayoutGroup.Constraint.FixedRowCount;
+        _grid.spacing = new Vector2(5, -7);
         _grid.startCorner = GridLayoutGroup.Corner.UpperLeft;
         _grid.startAxis = GridLayoutGroup.Axis.Horizontal;
-        _grid.constraintCount = 2;
-        _rows[0] = CreateRow("Drill:", () => $"{(GameCtrl.instance.data.upgrades[1] ? "\u2713" : "x")}");
-        _rows[1] = CreateRow("Fall Warp:", () => $"{(GameCtrl.instance.data.upgrades[2] ? "\u2713" : "x")}");
-        _rows[2] = CreateRow("Grater:", () => $"{(GameCtrl.instance.data.items[310] ? "\u2713" : "x")}");
-        _rows[3] = CreateRow("Worm:", () => $"{(GameCtrl.instance.data.switches[236] ? "\u2713" : "x")}");
-        _rows[4] = CreateRow("Rats:", () => $"{ArchipelagoClient.ArchipelagoData.Rats}/6");
-        _rows[5] = CreateRow("Fish:", () => $"{ArchipelagoClient.ArchipelagoData.Fish}/3");
+        _grid.padding = new RectOffset(5, 5, 0, 0);
+        _grid.constraintCount = 4;
+        //_rows[0] = CreateRow("Jump:", () => $"{(ArchipelagoClient.ArchipelagoData.HasMove(Moves.Jump) ? yesString : noString)}");
+        _rows[1] = CreateRow("Punch", () => $"{(ArchipelagoClient.ArchipelagoData.HasMove(Moves.Punch) ? yesString : noString)}");
+        _rows[2] = CreateRow("Climb:", () => $"{(ArchipelagoClient.ArchipelagoData.HasMove(Moves.Climb) ? yesString : noString)}");
+        _rows[3] = CreateRow("Slam:", () => $"{(ArchipelagoClient.ArchipelagoData.HasMove(Moves.Slam) ? yesString : noString)}");
+        _rows[4] = CreateRow("Headbutt:", () => $"{(ArchipelagoClient.ArchipelagoData.HasMove(Moves.Headbutt) ? yesString : noString)}");
+        _rows[5] = CreateRow("WallJump:", () => $"{(ArchipelagoClient.ArchipelagoData.HasMove(Moves.WallJump) ? yesString : noString)}");
+        //_rows[6] = CreateRow("Dive:", () => $"{(ArchipelagoClient.ArchipelagoData.HasMove(Moves.Dive) ? yesString : noString)}");
+        _rows[7] = CreateRow("Crouch:", () => $"{(ArchipelagoClient.ArchipelagoData.HasMove(Moves.Crouch) ? yesString : noString)}");
+        _rows[8] = CreateRow("Drill:", () => $"{(GameCtrl.instance.data.upgrades[1] ? yesString : noString)}");
+        _rows[9] = CreateRow("Fall Warp:", () => $"{(GameCtrl.instance.data.upgrades[2] ? yesString : noString)}");
+        _rows[10] = CreateRow("Grater:", () => $"{(GameCtrl.instance.data.items[310] ? yesString : noString)}");
+        _rows[11] = CreateRow("Worm:", () => $"{(GameCtrl.instance.data.switches[236] ? yesString : noString)}");
+        _rows[12] = CreateRow("Rats:", () => $"{ArchipelagoClient.ArchipelagoData.Rats}/6");
+        _rows[13] = CreateRow("Fish:", () => $"{ArchipelagoClient.ArchipelagoData.Fish}/3");
     }
 
     private GameObject CreateRow(string title, Func<string> textGetter)
@@ -99,12 +112,12 @@ public class APMainMenuTrackerUI : MonoBehaviour
         rectTransform.localRotation = Quaternion.identity;
         rectTransform.localScale = Vector3.one;
         var sizeFitter = textObject.AddComponent<ContentSizeFitter>();
-        sizeFitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
-        sizeFitter.horizontalFit = ContentSizeFitter.FitMode.PreferredSize;
+        sizeFitter.verticalFit = ContentSizeFitter.FitMode.Unconstrained;
+        sizeFitter.horizontalFit = ContentSizeFitter.FitMode.Unconstrained;
         var text = textObject.AddComponent<Text>();
         text.text = string.Empty;
         text.font = _font;
-        text.fontSize = 16;
+        text.fontSize = 12;
         text.alignment = alignment;
         text.material = new Material(_font.material)
         {
@@ -129,13 +142,14 @@ public class APMainMenuTrackerUI : MonoBehaviour
         if (!_bLoaded)
         {
             //set visibility for info that is option-based
-            _rows[4].SetActive(ArchipelagoClient.SlotData.IsRatsanity);
-            _rows[5].SetActive(ArchipelagoClient.SlotData.IsFishsanity);
+            _rows[..7].ToList().ForEach(x => x?.SetActive(ArchipelagoClient.SlotData.IsMovesanity));
+            _rows[12].SetActive(ArchipelagoClient.SlotData.IsRatsanity);
+            _rows[13].SetActive(ArchipelagoClient.SlotData.IsFishsanity);
             _bLoaded = true;
         }
 
         //handle slide-in/-out
-        _shouldShow = GameCtrl.instance.bPause && GameCtrl.instance.currentWorld >= 0;
+        _shouldShow = (Input.GetKey(KeyCode.JoystickButton6) || GameCtrl.instance.bPause) && GameCtrl.instance.currentWorld >= 0;
         _isShowing = _t > 0f;
         _elapsed = 0f;
         if (_shouldShow || _isShowing)

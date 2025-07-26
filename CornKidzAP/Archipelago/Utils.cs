@@ -1,4 +1,6 @@
-using Archipelago.MultiClient.Net.Models;
+using System.Text;
+using HarmonyLib;
+using Color = Archipelago.MultiClient.Net.Models.Color;
 
 namespace CornKidzAP.Archipelago;
 
@@ -43,5 +45,16 @@ public static class Utils
         data.bP1only = copySettings.bP1only;
         data.bAchDisable = copySettings.bAchDisable;
         data.bForce60hz = copySettings.bForce60hz;
+    }
+
+    public static void LogInstructions(this CodeMatcher matcher)
+    {
+        var i = 0;
+        StringBuilder stringBuilder = new();
+        foreach (var instr in matcher.InstructionEnumeration())
+        {
+            stringBuilder.AppendLine($"[{i++}]{instr}: {instr.opcode} {instr.operand} ({instr.operand?.GetType()?.Name ?? "NULL"})");
+        }
+        CornKidzAP.Logger.LogInfo(stringBuilder.ToString());
     }
 }

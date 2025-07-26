@@ -8,7 +8,7 @@ public enum Moves
     Slam,
     Headbutt,
     WallJump,
-    Swim,
+    Dive,
     Crouch,
 }
 
@@ -86,7 +86,7 @@ public static class ItemHandler
     public static void UnlockMove(Moves move)
     {
         CornKidzAP.Logger.LogDebug($"UnlockMove {move} {UI.instance is null}");
-        //ToDo
+        ArchipelagoClient.ArchipelagoData.Moves[move] = true;
     }
 
     public static void AddRat()

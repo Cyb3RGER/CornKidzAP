@@ -273,7 +273,7 @@ public static class ArchipelagoClient
                 ItemHandler.UnlockMove(Moves.WallJump);
                 break;
             case APLookup.BaseID + 6:
-                ItemHandler.UnlockMove(Moves.Swim);
+                ItemHandler.UnlockMove(Moves.Dive);
                 break;
             case APLookup.BaseID + 7:
                 ItemHandler.UnlockMove(Moves.Crouch);
