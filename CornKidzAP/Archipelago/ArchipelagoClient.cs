@@ -40,6 +40,7 @@ public static class ArchipelagoClient
     public static string LastSeed;
     public static bool IsNew { get; set; }
     public static bool HasBeatenGoal { get; private set; }
+    public static ConcurrentDictionary<Hint, bool> Hints { get; private set; } = [];
     
     [CanBeNull] public static Version ModVersion => Version.TryParse(MyPluginInfo.PLUGIN_VERSION, out var version) ? version : null;
 
@@ -166,6 +167,8 @@ public static class ArchipelagoClient
                     UI.instance.UnPause();
                 }
                 CheckVersion().Forget();
+                Hints.Clear();
+                Session.DataStorage.TrackHints(Session_UpdateHints, true, loginSuccess.Slot, loginSuccess.Team);
             }
             else if (loginResult is LoginFailure loginFailure)
             {
@@ -202,6 +205,7 @@ public static class ArchipelagoClient
         HasBeatenGoal = false;
         State = APState.Menu;
         if (APDeathLinkHandler) APDeathLinkHandler.DeathLinkService = null;
+        Hints.Clear();
     }
 
     private static void Session_TrackPlayerStatus(ArchipelagoClientState state)
@@ -347,6 +351,12 @@ public static class ArchipelagoClient
             case APLookup.BaseID + 30:
                 ItemHandler.AddTrap(Traps.SkidTrap);
                 break;
+            case APLookup.BaseID + 31:
+                ItemHandler.AddSomeOtherPlaceSwitch();
+                break;
+            case APLookup.BaseID + 32:
+                ItemHandler.AddTestZoneCube();
+                break;
         }
 
         ArchipelagoData.SaveToDisk();
@@ -378,6 +388,14 @@ public static class ArchipelagoClient
         if (message is ItemSendLogMessage { IsRelatedToActivePlayer: true } and not HintItemSendLogMessage or HintItemSendLogMessage { IsRelatedToActivePlayer: true, IsFound: false } or GoalLogMessage { IsActivePlayer: true } or ReleaseLogMessage { IsActivePlayer: true } or CollectLogMessage { IsActivePlayer: true })
             APNotificationUI?.AddNotification(new APConsoleMessage(message));
         APConsole?.AddLogMessage(new APConsoleMessage(message));
+    }
+
+    private static void Session_UpdateHints(Hint[] hints)
+    {
+        foreach (var hint in hints)
+        {
+            Hints.AddOrUpdate(hint, _ => true, (_,_) => true);
+        }
     }
 
     public static async UniTaskVoid Disconnect()

@@ -15,13 +15,13 @@ public class APMainMenuTrackerUI : MonoBehaviour
     private float _waitTimer;
     private const float _duration = .5f;
     private const float _waitTime = 0f;
-    private Vector3 _startPosition = new(0, -100, 0);
-    private Vector3 _targetPosition = new(0, 50, 0);
+    private Vector3 _startPosition = new(0, -200, 0);
+    private Vector3 _targetPosition = new(0, 75, 0);
     private float _elapsed;
     private Font _font;
     private GridLayoutGroup _grid;
     private Image _image;
-    private GameObject[] _rows = new GameObject[14];
+    private GameObject[] _rows = new GameObject[16];
     public GameObject HUDObject;
     
     private const string noString = "-";
@@ -53,15 +53,15 @@ public class APMainMenuTrackerUI : MonoBehaviour
         sizeFitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
         sizeFitter.horizontalFit = ContentSizeFitter.FitMode.PreferredSize;
         _grid = HUDObject.AddComponent<GridLayoutGroup>();
-        _grid.cellSize = new(76, 18);
-        _grid.constraint = GridLayoutGroup.Constraint.FixedRowCount;
+        _grid.cellSize = new(95, 20);
+        _grid.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
         _grid.spacing = new Vector2(5, -7);
         _grid.startCorner = GridLayoutGroup.Corner.UpperLeft;
         _grid.startAxis = GridLayoutGroup.Axis.Horizontal;
         _grid.padding = new RectOffset(5, 5, 0, 0);
-        _grid.constraintCount = 4;
+        _grid.constraintCount = 3;
         //_rows[0] = CreateRow("Jump:", () => $"{(ArchipelagoClient.ArchipelagoData.HasMove(Moves.Jump) ? yesString : noString)}");
-        _rows[1] = CreateRow("Punch", () => $"{(ArchipelagoClient.ArchipelagoData.HasMove(Moves.Punch) ? yesString : noString)}");
+        _rows[1] = CreateRow("Punch:", () => $"{(ArchipelagoClient.ArchipelagoData.HasMove(Moves.Punch) ? yesString : noString)}");
         _rows[2] = CreateRow("Climb:", () => $"{(ArchipelagoClient.ArchipelagoData.HasMove(Moves.Climb) ? yesString : noString)}");
         _rows[3] = CreateRow("Slam:", () => $"{(ArchipelagoClient.ArchipelagoData.HasMove(Moves.Slam) ? yesString : noString)}");
         _rows[4] = CreateRow("Headbutt:", () => $"{(ArchipelagoClient.ArchipelagoData.HasMove(Moves.Headbutt) ? yesString : noString)}");
@@ -74,6 +74,8 @@ public class APMainMenuTrackerUI : MonoBehaviour
         _rows[11] = CreateRow("Worm:", () => $"{(GameCtrl.instance.data.switches[236] ? yesString : noString)}");
         _rows[12] = CreateRow("Rats:", () => $"{ArchipelagoClient.ArchipelagoData.Rats}/6");
         _rows[13] = CreateRow("Fish:", () => $"{ArchipelagoClient.ArchipelagoData.Fish}/3");
+        _rows[14] = CreateRow("Switches:", () => $"{ArchipelagoClient.ArchipelagoData.SomeOtherPlaceSwitches}/4");
+        _rows[15] = CreateRow("Cubes:", () => $"{ArchipelagoClient.ArchipelagoData.TestZoneCube}/25");
     }
 
     private GameObject CreateRow(string title, Func<string> textGetter)
@@ -86,24 +88,24 @@ public class APMainMenuTrackerUI : MonoBehaviour
         rectTransform.localScale = Vector3.one;
         var layout = row.AddComponent<HorizontalLayoutGroup>();
         layout.childAlignment = TextAnchor.MiddleLeft;
-        AddTextChild(row.transform, title);
-        AddTextChild(row.transform, textGetter);
+        AddTextChild(row.transform, title, 14);
+        AddTextChild(row.transform, textGetter, 12);
         return row;
     }
 
-    private void AddTextChild(Transform parent, string text)
+    private void AddTextChild(Transform parent, string text, int fontSize)
     {
-        var trackerText = AddTextChild_internal(parent, TextAnchor.MiddleLeft);
+        var trackerText = AddTextChild_internal(parent, TextAnchor.MiddleLeft, fontSize);
         trackerText.constText = text;
     }
 
-    private void AddTextChild(Transform parent, Func<string> textGetter)
+    private void AddTextChild(Transform parent, Func<string> textGetter, int fontSize)
     {
-        var trackerText = AddTextChild_internal(parent, TextAnchor.MiddleRight);
+        var trackerText = AddTextChild_internal(parent, TextAnchor.MiddleRight, fontSize);
         trackerText.TextGetter = textGetter;
     }
 
-    private APMainMenuTrackerText AddTextChild_internal(Transform parent, TextAnchor alignment)
+    private APMainMenuTrackerText AddTextChild_internal(Transform parent, TextAnchor alignment, int fontSize)
     {
         var textObject = new GameObject("Text");
         var rectTransform = textObject.AddComponent<RectTransform>();
@@ -117,7 +119,7 @@ public class APMainMenuTrackerUI : MonoBehaviour
         var text = textObject.AddComponent<Text>();
         text.text = string.Empty;
         text.font = _font;
-        text.fontSize = 12;
+        text.fontSize = fontSize;
         text.alignment = alignment;
         text.material = new Material(_font.material)
         {
@@ -145,11 +147,13 @@ public class APMainMenuTrackerUI : MonoBehaviour
             _rows[..7].ToList().ForEach(x => x?.SetActive(ArchipelagoClient.SlotData.IsMovesanity));
             _rows[12].SetActive(ArchipelagoClient.SlotData.IsRatsanity);
             _rows[13].SetActive(ArchipelagoClient.SlotData.IsFishsanity);
+            _rows[14].SetActive(ArchipelagoClient.SlotData.IsSwitchsanity);
+            _rows[15].SetActive(ArchipelagoClient.SlotData.IsTestCubesanity);
             _bLoaded = true;
         }
 
         //handle slide-in/-out
-        _shouldShow = (Input.GetKey(KeyCode.JoystickButton6) || GameCtrl.instance.bPause) && GameCtrl.instance.currentWorld >= 0;
+        _shouldShow = (Input.GetKey(KeyCode.JoystickButton6) || Input.GetKey(KeyCode.F6)) && GameCtrl.instance.currentWorld >= 0;
         _isShowing = _t > 0f;
         _elapsed = 0f;
         if (_shouldShow || _isShowing)

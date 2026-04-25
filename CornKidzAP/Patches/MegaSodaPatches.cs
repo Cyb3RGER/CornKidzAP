@@ -3,13 +3,13 @@ using HarmonyLib;
 
 namespace CornKidzAP.Patches;
 
-public class MegaSodePatches
+public class MegaSodaPatches
 {
     /// <summary>
     /// Patch to fix mega soda
     /// </summary>
     [HarmonyPatch(typeof(SaveItem), nameof(SaveItem.HPup))]
-    public static class MegaSodeFix
+    public static class MegaSodaFix
     {
         [HarmonyPrefix]
         public static bool Prefix(SaveItem __instance)

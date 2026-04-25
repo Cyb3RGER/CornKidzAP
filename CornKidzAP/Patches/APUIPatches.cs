@@ -23,14 +23,11 @@ public class APUIPatches
             if (___currentMenu != 0 || ___menuTimer != 1) return;
             if (GameCtrl.instance.currentWorld <= -100) return;
             ___quest.gameObject.SetActive(!ArchipelagoClient.HasBeatenGoal);
-            ___quest.text = ArchipelagoClient.SlotData.Goal switch
-            {
-                GoalTypes.Owlloh => "BEAT OWLLOH",
-                GoalTypes.Tower => "ESCAPE DREAM",
-                GoalTypes.Anxiety => "BEAT ANXIETY TOWER",
-                GoalTypes.God => "MEET DOG GOD",
-                _ => throw new ArgumentOutOfRangeException()
-            };
+            var beatenGoalCount = ArchipelagoClient.ArchipelagoData.BeatenGoals.Count();
+            var neededGoalCount = ArchipelagoClient.SlotData.Goals.Count();
+            var text = $"{beatenGoalCount}/{neededGoalCount}|{ArchipelagoClient.SlotData.Goals.Describe(ArchipelagoClient.ArchipelagoData.BeatenGoals)}";
+            ___quest.text = text;
+            ___quest.horizontalOverflow = HorizontalWrapMode.Overflow;
         }
     }
     

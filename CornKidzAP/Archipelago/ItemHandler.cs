@@ -124,4 +124,18 @@ public static class ItemHandler
         CornKidzAP.Logger.LogDebug($"AddFish {UI.instance is null} {ArchipelagoClient.ArchipelagoData.Fish}");
         ++ArchipelagoClient.ArchipelagoData.Fish;
     }
+
+    public static void AddSomeOtherPlaceSwitch()
+    {
+        CornKidzAP.Logger.LogDebug($"AddSomeOtherPlaceSwitch {UI.instance is null} {ArchipelagoClient.ArchipelagoData.SomeOtherPlaceSwitches}");
+        if (ArchipelagoClient.ArchipelagoData.SomeOtherPlaceSwitches >= 4) return;
+        SetSwitch(512 + ArchipelagoClient.ArchipelagoData.SomeOtherPlaceSwitches);
+        ++ArchipelagoClient.ArchipelagoData.SomeOtherPlaceSwitches;
+    }
+
+    public static void AddTestZoneCube()
+    {
+        CornKidzAP.Logger.LogDebug($"AddTestZoneCube {UI.instance is null} {ArchipelagoClient.ArchipelagoData.TestZoneCube}");
+        ++ArchipelagoClient.ArchipelagoData.TestZoneCube;
+    }
 }

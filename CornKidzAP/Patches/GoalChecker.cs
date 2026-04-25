@@ -6,12 +6,16 @@ namespace CornKidzAP.Patches;
 
 public class GoalChecker
 {
-    private static readonly Dictionary<GoalTypes, int> GoalToSwitchId = new()
+    private static readonly Dictionary<int, GoalSelection> SwitchIdToGoal = new()
     {
-        { GoalTypes.Owlloh, 230 }, //DefeatOwlloh switch 230?
-        { GoalTypes.Tower, 328 }, //TowerComplete
-        //{ GoalTypes.Anxiety, -3002 }, //AnxietyComplete
-        //{ GoalTypes.God, -3003 }, //DogGod
+        { 230, GoalSelection.Owlloh }, //DefeatOwlloh switch 230?
+        { 328, GoalSelection.Tower }, //TowerComplete
+    };
+    
+    private static readonly Dictionary<string, GoalSelection> SceneIdToGoal = new()
+    {
+        {"TowerN00", GoalSelection.Anxiety}, //Anxiety Tower
+        {"secretZone00", GoalSelection.God} //Dog God
     };
 
 
@@ -30,11 +34,16 @@ public class GoalChecker
             if (!__instance.bOn)
                 return;
 
-            if (!GoalToSwitchId.TryGetValue(ArchipelagoClient.SlotData.Goal, out var id))
+            if (!SwitchIdToGoal.TryGetValue(__instance.id, out var possibleGoal))
                 return;
 
-            if (__instance.id != id) return;
-            ArchipelagoClient.SetGoalAchieved();
+            if (!ArchipelagoClient.SlotData.Goals.HasFlag(possibleGoal) || ArchipelagoClient.ArchipelagoData.BeatenGoals.HasFlag(possibleGoal))
+                return;
+            
+            ArchipelagoClient.ArchipelagoData.BeatenGoals |= possibleGoal;
+            
+            if(ArchipelagoClient.ArchipelagoData.BeatenGoals == ArchipelagoClient.SlotData.Goals)
+                ArchipelagoClient.SetGoalAchieved();
         }
     }
 
@@ -50,11 +59,20 @@ public class GoalChecker
             if (ArchipelagoClient.HasBeatenGoal || GameCtrl.instance.currentWorld < 0)
                 return;
 
-            if (!GoalToSwitchId.TryGetValue(ArchipelagoClient.SlotData.Goal, out var id))
-                return;
+            foreach (var (id, goal) in SwitchIdToGoal)
+            {
+                if(!__instance.data.switches[id])
+                    continue;
+                
+                if (!ArchipelagoClient.SlotData.Goals.HasFlag(goal) || ArchipelagoClient.ArchipelagoData.BeatenGoals.HasFlag(goal))
+                    continue;
+                
+                ArchipelagoClient.ArchipelagoData.BeatenGoals |= goal;
 
-            if (!__instance.data.switches[id]) return;
-            ArchipelagoClient.SetGoalAchieved();
+            }
+            
+            if(ArchipelagoClient.ArchipelagoData.BeatenGoals == ArchipelagoClient.SlotData.Goals)
+                ArchipelagoClient.SetGoalAchieved();
         }
     }
 
@@ -66,12 +84,19 @@ public class GoalChecker
         {
             if (!ArchipelagoClient.Authenticated || ArchipelagoClient.State != APState.InGame)
                 return;
-            if(ArchipelagoClient.HasBeatenGoal)
+            if (ArchipelagoClient.HasBeatenGoal)
                 return;
-            if ((ArchipelagoClient.SlotData.Goal != GoalTypes.Anxiety || GameCtrl.instance.lastScene != "TowerN00") &&
-                (ArchipelagoClient.SlotData.Goal != GoalTypes.God || GameCtrl.instance.lastScene != "secretZone00")) 
+
+            if(!SceneIdToGoal.TryGetValue(GameCtrl.instance.lastScene,out var possibleGoal))
                 return;
-            ArchipelagoClient.SetGoalAchieved();
+            
+            if (!ArchipelagoClient.SlotData.Goals.HasFlag(possibleGoal) || ArchipelagoClient.ArchipelagoData.BeatenGoals.HasFlag(possibleGoal))
+                return;
+            
+            ArchipelagoClient.ArchipelagoData.BeatenGoals |= possibleGoal;
+            
+            if(ArchipelagoClient.ArchipelagoData.BeatenGoals == ArchipelagoClient.SlotData.Goals)
+                ArchipelagoClient.SetGoalAchieved();
         }
     }
 }

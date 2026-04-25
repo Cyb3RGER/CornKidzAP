@@ -14,8 +14,11 @@ public class ArchipelagoData
     public int Index { get; set; }
     public int Rats { get; set; }
     public int Fish { get; set; }
+    public int SomeOtherPlaceSwitches { get; set; }
+    public int TestZoneCube { get; set; }
     public string LastScene { get; set; }
     public Dictionary<Moves, bool> Moves { get; set; } = Enum.GetValues(typeof(Moves)).Cast<Moves>().ToDictionary(x => x, x => false);
+    public GoalSelection BeatenGoals { get; set; } = GoalSelection.None;
 
     [JsonConstructor]
     public ArchipelagoData()

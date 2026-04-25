@@ -217,6 +217,10 @@ public static class APLookup
         { BaseID + 203, 238 }, //Hollow Graveyard: Fish Killed
         { BaseID + 204, 239 }, //Hollow: Inside The Tree Fish 1
         { BaseID + 205, 240 }, //Hollow: Inside The Tree Fish 2
+        { BaseID + 209, 512 }, //Some Other Place: Switch Near Green Headband
+        { BaseID + 210, 513 }, //Some Other Place: Switch Above Pool
+        { BaseID + 211, 514 }, //Some Other Place: Switch In 2010
+        { BaseID + 212, 515 }, //Some Other Place: Switch In Test Zone
     };
 
     public static readonly Dictionary<long, int> APLocIdToRatIndex = new()
@@ -241,6 +245,34 @@ public static class APLookup
         { BaseID + 208, "WEAR BLACK HEADBAND + SHIRT?" }, //Anxiety Tower: Black Headband Under Entrance Soda Machine
     };
 
+    public static readonly Dictionary<long, int> APLocIdToTestCubeIndex = new()
+    {
+        { BaseID + 213, 1 }, //Test Zone: Cube Behind Crank Door At Breakable Blocks
+        { BaseID + 214, 2 }, //Test Zone: Cube On Timer Challenge Dirt Pillar
+        { BaseID + 215, 3 }, //Test Zone: Cube Above Jump Pad Climb
+        { BaseID + 216, 4 }, //Test Zone: Cube Above Far Side Pipe
+        { BaseID + 217, 5 }, //Test Zone: Cube On Drill Climb
+        { BaseID + 218, 6 }, //Test Zone: Cube By Swing Above Pool
+        { BaseID + 219, 7 }, //Test Zone: Cube In Pool
+        { BaseID + 220, 8 }, //Test Zone: Cube On Platform Above Owls
+        { BaseID + 221, 9 }, //Test Zone: Cube By Moveable Boulders
+        { BaseID + 222, 10 }, //Test Zone: Cube By Swing After Bubbles Near Entrance
+        { BaseID + 223, 11 }, //Test Zone: Cube Above Crank Lift
+        { BaseID + 224, 12 }, //Test Zone: Cube Above Ground Screw Lift
+        { BaseID + 225, 13 }, //Test Zone: Cube In Breakable Block At Bomb Bird
+        { BaseID + 226, 14 }, //Test Zone: Cube In Top Breakable Block
+        { BaseID + 227, 15 }, //Test Zone: Cube On Dirt Pillar In Pool
+        { BaseID + 228, 16 }, //Test Zone: Cube On Dirt Pillar Near Entrance
+        { BaseID + 229, 17 }, //Test Zone: Cube By Swing Above Drill Climb
+        { BaseID + 230, 18 }, //Test Zone: Cube In Doorway Red White Gate
+        { BaseID + 231, 19 }, //Test Zone: Cube In Doorway Behind White Gate
+        { BaseID + 232, 20 }, //Test Zone: Cube On Smaller Climb Wall
+        { BaseID + 233, 21 }, //Test Zone: Cube On Dirt Wall With Pipes
+        { BaseID + 234, 22 }, //Test Zone: Cube At Moving Red Cylinder
+        { BaseID + 235, 23 }, //Test Zone: Cube At Moving Red Ball
+        { BaseID + 236, 24 }, //Test Zone: Cube On Pipe Near Entrance
+        { BaseID + 237, 25 }, //Test Zone: Cube In Chest
+    };
 
     public static readonly Dictionary<int, long> SaveItemIdToAPLocId = InvertDictionary(APLocIdToSaveItemId);
     public static readonly Dictionary<int, long> UpgradeIdToAPLocId = InvertDictionary(APLocIdToUpgradeId);
@@ -248,6 +280,7 @@ public static class APLookup
     public static readonly Dictionary<int, long> SwitchIdToAPLocId = InvertDictionary(APLocIdToSwitchId);
     public static readonly Dictionary<string, long> StringToAPLocId = InvertDictionary(APLocIdToString);
     public static readonly Dictionary<int, long> RatIndexToAPLocId = InvertDictionary(APLocIdToRatIndex);
+    public static readonly Dictionary<int, long> TestCubeIndexToAPLocId = InvertDictionary(APLocIdToTestCubeIndex);
 
     public static readonly Dictionary<int, long> SwitchIdToAPItem = new()
     {
@@ -310,5 +343,10 @@ public static class APLookup
     public static long? GetAPLocationForSwitchId(int id)
     {
         return SwitchIdToAPLocId.TryGetValue(id, out var locId) ? locId : null;
+    }
+    
+    public static long? GetAPLocationForTestCubeIndex(int id)
+    {
+        return TestCubeIndexToAPLocId.TryGetValue(id, out var locId) ? locId : null;
     }
 }

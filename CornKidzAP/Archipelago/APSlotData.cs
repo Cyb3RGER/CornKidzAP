@@ -1,16 +1,9 @@
 using System;
 using System.Collections.Generic;
 using JetBrains.Annotations;
+using Newtonsoft.Json.Linq;
 
 namespace CornKidzAP.Archipelago;
-
-public enum GoalTypes
-{
-    Owlloh,
-    Tower,
-    Anxiety,
-    God
-}
 
 public class APSlotData(Dictionary<string, object> slotData)
 {
@@ -22,6 +15,13 @@ public class APSlotData(Dictionary<string, object> slotData)
             return _default;
         return int.TryParse(value.ToString(), out var result) ? result : _default;
     }
+
+    public T[] GetSet<T>(string key)
+    {
+        if (!slotData.TryGetValue(key, out var value))
+            return [];
+        return ((JArray)value).ToObject<T[]>();
+    }
     
     [CanBeNull]
     public Version GetVersion(string key, [CanBeNull] Version _default = null)
@@ -32,6 +32,22 @@ public class APSlotData(Dictionary<string, object> slotData)
         return didParse ? result : _default;
     }
 
+    public GoalSelection Goals
+    {
+        get
+        {
+            var values = GetSet<string>("goal_selection");
+            if (values.Length == 0 && slotData.ContainsKey("goal"))
+            {
+#pragma warning disable CS0612 // Type or member is obsolete - Downward compatibility
+                return Goal.ToGoalSelection();
+#pragma warning restore CS0612 // Type or member is obsolete
+            }
+            return values.ToGoalSelection();
+        }
+    }
+
+    [Obsolete]
     public GoalTypes Goal
     {
         get
@@ -51,4 +67,6 @@ public class APSlotData(Dictionary<string, object> slotData)
     public bool IsDeathLink => GetInt("death_link") > 0;
     public bool IsOpenWollowsHollow => GetInt("open_wollows_hollow") > 0;
     public bool IsMovesanity => GetInt("movesanity") > 0;
+    public bool IsSwitchsanity => GetInt("switchsanity") > 0;
+    public bool IsTestCubesanity => GetInt("test_cubesanity") > 0;
 }

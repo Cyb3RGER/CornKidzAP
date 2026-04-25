@@ -15,6 +15,7 @@ public class APLookupTests
                 APLookup.APLocIdToAchievementId.Select(x => x.Key).ToList(),
                 APLookup.APLocIdToRatIndex.Select(x => x.Key).ToList(),
                 APLookup.APLocIdToSwitchId.Select(x => x.Key).ToList(),
+                APLookup.APLocIdToTestCubeIndex.Select(x => x.Key).ToList()
             ];
         var keys = keysGrouped.SelectMany(x => x).ToList();
         var keysDistinct = keys.Distinct().ToList();
