@@ -1,6 +1,5 @@
 using CornKidzAP.Archipelago;
 using HarmonyLib;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace CornKidzAP.Patches;
@@ -13,27 +12,56 @@ public class SwitchCubePatches
     [HarmonyPatch(typeof(CopySaveTrigger), "Update")]
     public static class SwitchCubeCollectorDoorlights
     {
-        [HarmonyPostfix]
-        public static bool Prefix(CopySaveTrigger __instance, Trigger ___trigger)
+        [HarmonyPrefix]
+        public static bool Prefix(CopySaveTrigger __instance)
         {
             if (!ArchipelagoClient.Authenticated || ArchipelagoClient.State != APState.InGame)
                 return true;
             if (!ArchipelagoClient.SlotData.IsSwitchsanity)
                 return true;
+            if (SceneManager.GetActiveScene().name != "secretZone00")
+                return true;
             if ((!__instance.saveTrigger || __instance.saveTrigger.id is < 512 or > 514) && __instance.manualID != 515)
                 return true;
 
-            
             var id = __instance.saveTrigger ? __instance.saveTrigger.id : __instance.manualID;
             var locID = APLookup.GetAPLocationForSwitchId(id);
             if (locID is null)
                 return true;
 
+            if (__instance.bOn)
+                return false;
+
             if (512 - id + ArchipelagoClient.ArchipelagoData.SomeOtherPlaceSwitches <= 0)
                 return false;
-            
-            APLocationChecker.FakeLoadCopySaveTrigger(__instance, ___trigger, true);
-            
+
+            APLocationChecker.FakeLoadCopySaveTrigger(__instance, null, true);
+
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// Patch to update the switches (SaveTrigger) based on AP state
+    /// </summary>
+    [HarmonyPatch(typeof(SaveTrigger), "Awake")]
+    public static class SwitchCubeDisableAwake
+    {
+        [HarmonyPrefix]
+        public static bool Prefix(SaveTrigger __instance, Trigger ___trigger)
+        {
+            if (!ArchipelagoClient.Authenticated || ArchipelagoClient.State != APState.InGame)
+                return true;
+            if (!ArchipelagoClient.SlotData.IsSwitchsanity)
+                return true;
+            if (__instance.id is < 512 or > 515)
+                return true;
+
+            var locID = APLookup.GetAPLocationForSwitchId(__instance.id);
+            if (locID is null)
+                return true;
+
+            APLocationChecker.FakeLoadSaveTrigger(__instance, ___trigger, ArchipelagoClient.Session.Locations.AllLocationsChecked.Contains(locID.Value));
             return false;
         }
     }
@@ -51,17 +79,17 @@ public class SwitchCubePatches
                 return true;
             if (!ArchipelagoClient.SlotData.IsSwitchsanity)
                 return true;
-            if (__instance.bOn || __instance.id is < 512 or > 515)
+            if (__instance.id is < 512 or > 515)
                 return true;
 
             var locID = APLookup.GetAPLocationForSwitchId(__instance.id);
             if (locID is null)
                 return true;
-            
+
             if (!ArchipelagoClient.Session.Locations.AllLocationsChecked.Contains(locID.Value))
                 return false;
-            
-            APLocationChecker.FakeLoadSaveTrigger(__instance, ___trigger, true);
+
+            APLocationChecker.FakeLoadSaveTrigger(__instance, ___trigger, __instance.bOn);
             return false;
         }
     }
@@ -79,7 +107,7 @@ public class SwitchCubePatches
                 return true;
             if (!ArchipelagoClient.SlotData.IsSwitchsanity)
                 return true;
-            if (!__instance.bOn || __instance.id is < 512 or > 515)
+            if (__instance.id is < 512 or > 515)
                 return true;
 
             var locId = APLookup.GetAPLocationForSwitchId(__instance.id);
@@ -88,12 +116,41 @@ public class SwitchCubePatches
 
             if (!ArchipelagoClient.Session.Locations.AllMissingLocations.Contains(locId.Value))
                 return false;
+            if (!__instance.bOn)
+                return false;
 
             APLocationChecker.SendLocations(locId.Value).Forget();
             return false;
         }
     }
-    
+
+    /// <summary>
+    /// Patch for CopySaveTrigger loading from AP State
+    /// </summary>
+    [HarmonyPatch(typeof(CopySaveTrigger), "Update")]
+    public static class SwitchCubeDisableCopySaveTrigger
+    {
+        [HarmonyPrefix]
+        public static bool Prefix(CopySaveTrigger __instance, Trigger ___trigger)
+        {
+            if (!ArchipelagoClient.Authenticated || ArchipelagoClient.State != APState.InGame)
+                return true;
+            if (!ArchipelagoClient.SlotData.IsSwitchsanity)
+                return true;
+            if (__instance.manualID != 515 || __instance.bOn)
+                return true;
+
+            var locId = APLookup.GetAPLocationForSwitchId(__instance.manualID);
+            if (locId is null)
+                return true;
+            if (__instance.bLoaded)
+                return false;
+
+            APLocationChecker.FakeLoadCopySaveTrigger(__instance, ___trigger, ArchipelagoClient.Session.Locations.AllLocationsChecked.Contains(locId.Value));
+            return false;
+        }
+    }
+
     [HarmonyPatch(typeof(TriggerArray), "Update")]
     public class DoorChecker
     {
@@ -102,10 +159,8 @@ public class SwitchCubePatches
         {
             if (!ArchipelagoClient.Authenticated || ArchipelagoClient.State != APState.InGame)
                 return true;
-
             if (!ArchipelagoClient.SlotData.IsTestCubesanity)
                 return true;
-
             if (__instance.name != "array" || SceneManager.GetActiveScene().name != "secretZone00")
                 return true;
 
